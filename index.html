@@ -2045,8 +2045,9 @@ function saveBuzzSheetUrl() {
 function loadBuzzSheetUrlInput() {
   var el = document.getElementById('buzz-sheet-url');
   if (!el) return;
-  // 若 localStorage 未設定，自動帶入預設 URL
-  if (!localStorage.getItem(BUZZ_SHEET_URL_KEY)) {
+  var stored = localStorage.getItem(BUZZ_SHEET_URL_KEY) || '';
+  // 如果沒有儲存、或儲存的是舊的 Sheets URL（非 Apps Script），強制換成預設
+  if (!stored || !stored.includes('script.google.com')) {
     localStorage.setItem(BUZZ_SHEET_URL_KEY, BUZZ_SCRIPT_DEFAULT);
   }
   el.value = localStorage.getItem(BUZZ_SHEET_URL_KEY) || BUZZ_SCRIPT_DEFAULT;
@@ -2160,9 +2161,12 @@ function rebuildBuzzCache() {
 
 // 自動決定資料來源：有 Script URL → 自動抓取；沒有 → 顯示快取或提示
 async function autoLoadBuzz() {
+  // 確保 localStorage 是正確的 Apps Script URL
+  var stored0 = localStorage.getItem(BUZZ_SHEET_URL_KEY) || '';
+  if (!stored0 || !stored0.includes('script.google.com')) {
+    localStorage.setItem(BUZZ_SHEET_URL_KEY, BUZZ_SCRIPT_DEFAULT);
+  }
   var sheetUrl = localStorage.getItem(BUZZ_SHEET_URL_KEY) || BUZZ_SCRIPT_DEFAULT;
-  // 確保 localStorage 有值
-  if (!localStorage.getItem(BUZZ_SHEET_URL_KEY)) localStorage.setItem(BUZZ_SHEET_URL_KEY, BUZZ_SCRIPT_DEFAULT);
   var lbl = document.getElementById('buzz-scan-label');
   loadBuzzSheetUrlInput();
 
