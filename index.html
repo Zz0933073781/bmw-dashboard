@@ -2279,6 +2279,11 @@ async function loadFromSheet() {
           var ptt   = parseInt(obj.ptt) || 0;
           var news  = parseInt(obj.news) || 0;
           var month = String(obj.month||'').trim();
+          // Google Sheets 可能把 "2026-10" 轉成 ISO 日期字串，需正規化為 YYYY-MM
+          if (month.length > 7 && month.includes('T')) {
+            var d = new Date(new Date(month).getTime() + 8 * 60 * 60 * 1000);
+            month = d.getUTCFullYear() + '-' + String(d.getUTCMonth()+1).padStart(2,'0');
+          }
           if (!brand) return;
           if (month && month !== buzzMonthKey()) return;
           if (!autoCache3[brand]) autoCache3[brand] = {};
@@ -2352,6 +2357,11 @@ async function loadFromSheet() {
         var ptt   = parseInt(obj.ptt) || 0;
         var news  = parseInt(obj.news) || 0;
         var month = String(obj.month||'').trim();
+        // Google Sheets 可能把 "2026-10" 轉成 ISO 日期字串，需正規化為 YYYY-MM
+        if (month.length > 7 && month.includes('T')) {
+          var d = new Date(new Date(month).getTime() + 8 * 60 * 60 * 1000);
+          month = d.getUTCFullYear() + '-' + String(d.getUTCMonth()+1).padStart(2,'0');
+        }
         if (!brand || !month) return;
         if (!allData2[brand]) allData2[brand] = {};
         allData2[brand][month] = { ptt: ptt, news: news };
