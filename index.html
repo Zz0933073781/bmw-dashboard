@@ -1,0 +1,2786 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMW 台灣經銷商 & 競品 Facebook 監控儀表板</title>
+  <!-- ========== BMW_LIVE_DATA_START ========== -->
+<script>
+    /* Auto-generated: 2026-10-01 12:10 */
+    window.DEMO_MODE       = false;
+    window.LIVE_ALERTS     = [];
+    window.LIVE_POST_COUNTS= {"台北氾德": {"group": "bmw", "posts": 0, "ok": false}, "台北鎔德": {"group": "bmw", "posts": 0, "ok": false}, "台北依德": {"group": "bmw", "posts": 0, "ok": false}, "台北尚德": {"group": "bmw", "posts": 0, "ok": false}, "桃園大桐": {"group": "bmw", "posts": 0, "ok": false}, "新竹中鏎": {"group": "bmw", "posts": 0, "ok": false}, "蘭陽鎔德": {"group": "bmw", "posts": 0, "ok": false}, "南投長慶": {"group": "bmw", "posts": 0, "ok": false}, "彰化昌一": {"group": "bmw", "posts": 0, "ok": false}, "嘉義賓歐": {"group": "bmw", "posts": 0, "ok": false}, "台灣賓士官方": {"group": "mb", "posts": 0, "ok": false}, "中華賓士": {"group": "mb", "posts": 0, "ok": false}, "台隆賓士": {"group": "mb", "posts": 0, "ok": false}, "台明賓士": {"group": "mb", "posts": 0, "ok": false}, "德冠賓士": {"group": "mb", "posts": 0, "ok": false}, "Audi Taiwan 官方": {"group": "audi", "posts": 0, "ok": false}, "奧迭北區": {"group": "audi", "posts": 0, "ok": false}, "台奧北區": {"group": "audi", "posts": 0, "ok": false}, "台灣保時捷官方": {"group": "porsche", "posts": 0, "ok": false}, "氾德永業保時捷": {"group": "porsche", "posts": 0, "ok": false}, "台北保時捷中心": {"group": "porsche", "posts": 0, "ok": false}, "新北保時捷中心": {"group": "porsche", "posts": 0, "ok": false}, "桃園保時捷中心": {"group": "porsche", "posts": 0, "ok": false}, "台南保時捷中心": {"group": "porsche", "posts": 0, "ok": false}};
+    window.LAST_SCAN_TIME  = "2026-10-01 12:10";
+    window.LIVE_OK_COUNT   = 0;
+    window.LIVE_FAIL_COUNT = 24;
+</script>
+<!-- ========== BMW_LIVE_DATA_END ========== -->
+
+<!-- ========== BMW_VIDEO_DATA_START ========== -->
+<script>
+    window.LIVE_VIDEOS       = [];
+    window.VIDEO_SCAN_TIME   = '';
+    window.VIDEO_ALERT_COUNT = 0;
+</script>
+<!-- ========== BMW_VIDEO_DATA_END ========== -->
+
+<!-- ========== BMW_BUZZ_DATA_START ========== -->
+<script>
+    window.LIVE_BUZZ = {
+        scan_time: '',
+        brands: {
+            bmw:     { ptt: 0, mobile01: 0, dcard: 0, news: 0, total: 0, hot_topics: [] },
+            mb:      { ptt: 0, mobile01: 0, dcard: 0, news: 0, total: 0, hot_topics: [] },
+            audi:    { ptt: 0, mobile01: 0, dcard: 0, news: 0, total: 0, hot_topics: [] },
+            porsche: { ptt: 0, mobile01: 0, dcard: 0, news: 0, total: 0, hot_topics: [] }
+        }
+    };
+</script>
+<!-- ========== BMW_BUZZ_DATA_END ========== -->
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #1c69d4 0%, #0a3d8f 100%);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(28,105,212,0.4);
+    }
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .bmw-logo { width: 52px; height: 52px; }
+    header h1 { font-size: 1.45rem; font-weight: 700; letter-spacing: 1px; }
+    header p  { font-size: 0.82rem; opacity: 0.75; margin-top: 3px; }
+    .header-right { text-align: right; font-size: 0.78rem; opacity: 0.8; }
+    #updated-time { font-size: 0.9rem; font-weight: 600; margin-top: 3px; }
+    .refresh-btn {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff; padding: 6px 16px;
+      border-radius: 20px; cursor: pointer;
+      font-size: 0.82rem; margin-top: 6px;
+      transition: background 0.2s;
+    }
+    .refresh-btn:hover { background: rgba(255,255,255,0.28); }
+
+    /* ── Tab Bar ── */
+    .tab-bar {
+      background: #161616;
+      border-bottom: 1px solid #2a2a2a;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 4px;
+    }
+    .tab-btn {
+      padding: 14px 22px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #777;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: #ccc; }
+    .tab-btn.active { color: #fff; border-bottom-color: #1c69d4; }
+    .tab-btn .badge {
+      font-size: 0.72rem;
+      background: #2a2a2a;
+      padding: 2px 8px;
+      border-radius: 10px;
+      color: #aaa;
+    }
+    .tab-btn.active .badge { background: #1c3a6e; color: #7fb3ff; }
+
+    .status-bar {
+      background: #1a1a1a;
+      padding: 10px 32px;
+      border-bottom: 1px solid #222;
+      font-size: 0.82rem;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* ── Tab Panels ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Content ── */
+    .content {
+      padding: 24px 32px;
+      max-width: 1900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    /* ── Region / Brand Section ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 4px solid #1c69d4;
+      padding-left: 16px;
+      margin-bottom: 16px;
+    }
+    .section-icon { font-size: 1.3rem; }
+    .section-label { font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; }
+    .section-sub { font-size: 0.78rem; color: #888; background: #222; padding: 3px 10px; border-radius: 12px; }
+    .section-line { flex: 1; height: 1px; opacity: 0.25; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 18px;
+    }
+
+    /* ── Card ── */
+    .page-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .page-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    }
+    .card-header {
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-icon { font-size: 1.1rem; }
+    .card-title { flex: 1; }
+    .card-title h3 { font-size: 0.88rem; font-weight: 700; line-height: 1.2; }
+    .card-title span { font-size: 0.7rem; opacity: 0.7; }
+    .card-link {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.72rem;
+      text-decoration: none;
+      padding: 3px 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .card-link:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+    .fb-embed-wrap {
+      background: #fff;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fb-embed-wrap iframe { display: none; border: none; width: 100%; }
+
+    .loading-ph {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 480px;
+      background: #f0f2f5;
+      width: 100%;
+      gap: 10px;
+      color: #888;
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid #ddd;
+      border-top-color: #1877f2;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-ph p { font-size: 0.8rem; }
+
+    /* ── Overview Tab ── */
+    .overview-layout {
+      padding: 24px 32px;
+      max-width: 1900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* Stat cards row */
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .stat-card.c-blue::before   { background: #1c69d4; }
+    .stat-card.c-red::before    { background: #dc2626; }
+    .stat-card.c-green::before  { background: #16a34a; }
+    .stat-card.c-yellow::before { background: #d97706; }
+    .stat-label { font-size: 0.75rem; color: #666; letter-spacing: 1px; margin-bottom: 8px; }
+    .stat-value { font-size: 2rem; font-weight: 800; line-height: 1; }
+    .stat-sub   { font-size: 0.78rem; color: #888; margin-top: 6px; }
+    .stat-trend { font-size: 0.78rem; margin-top: 4px; }
+    .trend-up   { color: #4ade80; }
+    .trend-down { color: #f87171; }
+    .trend-flat { color: #888; }
+
+    /* Brand comparison table */
+    .compare-section { }
+    .compare-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ccc;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compare-title span {
+      font-size: 0.75rem;
+      color: #555;
+      font-weight: 400;
+      background: #1a1a1a;
+      padding: 3px 10px;
+      border-radius: 10px;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .brand-table {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .brand-table-header {
+      padding: 12px 16px;
+      background: #222;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #aaa;
+      display: grid;
+      grid-template-columns: 1fr 80px 90px 60px;
+      gap: 8px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .brand-row {
+      padding: 10px 16px;
+      display: grid;
+      grid-template-columns: 1fr 80px 90px 60px;
+      gap: 8px;
+      align-items: center;
+      border-bottom: 1px solid #1e1e1e;
+      font-size: 0.82rem;
+      transition: background 0.15s;
+    }
+    .brand-row:last-child { border-bottom: none; }
+    .brand-row:hover { background: #222; }
+    .brand-name { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+    .brand-dot  { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .num-cell   { text-align: right; color: #ccc; }
+    .bar-cell   { }
+    .mini-bar-wrap { background: #111; border-radius: 4px; height: 6px; overflow: hidden; }
+    .mini-bar      { height: 100%; border-radius: 4px; }
+    .trend-cell { text-align: center; font-size: 0.8rem; font-weight: 700; }
+
+    /* Frequency heatmap */
+    .freq-section { }
+    .freq-grid {
+      display: grid;
+      grid-template-columns: 140px repeat(7, 1fr);
+      gap: 4px;
+      align-items: center;
+    }
+    .freq-label  { font-size: 0.78rem; color: #888; text-align: right; padding-right: 10px; }
+    .freq-day    { font-size: 0.7rem; color: #555; text-align: center; padding-bottom: 4px; }
+    .freq-cell {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: #000;
+      font-weight: 700;
+      cursor: default;
+    }
+    .freq-0  { background: #1a1a1a; color: transparent; }
+    .freq-1  { background: #1c3a1a; color: #4ade80; }
+    .freq-2  { background: #166534; color: #86efac; }
+    .freq-3  { background: #15803d; color: #fff; }
+    .freq-4  { background: #16a34a; color: #fff; }
+    .freq-5  { background: #22c55e; color: #000; }
+
+    /* ── Notes / Flag feature ── */
+    .note-section {
+      border-top: 1px solid #222;
+      padding: 8px 0 0;
+      margin-top: 8px;
+    }
+    .note-toggle-btn {
+      background: none;
+      border: 1px solid #2a2a2a;
+      color: #666;
+      font-size: 0.74rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .note-toggle-btn:hover { border-color: #555; color: #ccc; }
+    .flag-btn {
+      background: none;
+      border: 1px solid #2a2a2a;
+      color: #666;
+      font-size: 0.74rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .flag-btn:hover { border-color: #fbbf24; color: #fbbf24; }
+    .flag-btn.flagged { background: #2a1f00; border-color: #fbbf24; color: #fbbf24; }
+
+    .note-input-wrap {
+      display: none;
+      margin-top: 8px;
+      gap: 6px;
+      flex-direction: column;
+    }
+    .note-input-wrap.open { display: flex; }
+    .note-textarea {
+      background: #111;
+      border: 1px solid #333;
+      color: #ddd;
+      font-size: 0.8rem;
+      padding: 8px 10px;
+      border-radius: 8px;
+      outline: none;
+      resize: vertical;
+      min-height: 60px;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+    .note-textarea:focus { border-color: #1c69d4; }
+    .note-save-btn {
+      background: #1c69d4;
+      border: none;
+      color: #fff;
+      font-size: 0.76rem;
+      padding: 5px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .note-display {
+      background: #111;
+      border-left: 3px solid #1c69d4;
+      padding: 8px 10px;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.78rem;
+      color: #aaa;
+      line-height: 1.5;
+      display: none;
+      margin-top: 6px;
+    }
+    .note-display.has-note { display: block; }
+    .note-meta { font-size: 0.68rem; color: #555; margin-top: 4px; }
+
+    .flag-badge {
+      display: inline-block;
+      background: #2a1f00;
+      border: 1px solid #fbbf24;
+      color: #fbbf24;
+      font-size: 0.68rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    /* Alert filter for flagged */
+    .filter-btn.f-flag.active { background: #2a1f00; border-color: #fbbf24; color: #fbbf24; }
+
+    @media (max-width: 1100px) {
+      .stat-cards { grid-template-columns: repeat(2, 1fr); }
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .overview-layout { padding: 16px; }
+      .stat-cards { grid-template-columns: repeat(2, 1fr); }
+      .freq-grid { grid-template-columns: 80px repeat(7, 1fr); }
+    }
+
+    /* ── Featured Embed Cards ── */
+    .embed-card {
+      background: #0f172a; border: 1px solid #334155; border-radius: 10px;
+      padding: 10px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .embed-label {
+      font-size: 11px; color: #7fb3ff; font-weight: 600;
+    }
+
+    /* ── Video Search Tab ── */
+    .vsearch-btn {
+      background: #0f172a; border: 1px solid #1c69d4; color: #7fb3ff;
+      padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer;
+      transition: all .18s; white-space: nowrap;
+    }
+    .vsearch-btn:hover { background: #1c3a6e; color: #fff; }
+    .vsearch-tag { border-color: #7c3aed; color: #c4b5fd; }
+    .vsearch-tag:hover { background: #3b1d5e; }
+    .vsearch-acct { border-color: #0ea5e9; color: #7dd3fc; font-size: 12px; }
+    .vsearch-acct:hover { background: #0c4a6e; }
+
+    /* ── Video Tab ── */
+    .vid-filter-btn {
+      background: #1e293b; border: 1px solid #334155; color: #94a3b8;
+      padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer;
+      transition: all .2s;
+    }
+    .vid-filter-btn:hover { border-color: #1c69d4; color: #7fb3ff; }
+    .vid-filter-btn.active { background: #1c3a6e; border-color: #1c69d4; color: #fff; }
+    .vid-card {
+      background: #1e293b; border: 1px solid #334155; border-radius: 10px;
+      overflow: hidden; transition: transform .2s, border-color .2s; cursor: pointer;
+    }
+    .vid-card:hover { transform: translateY(-3px); border-color: #1c69d4; }
+    .vid-card.has-alert { border-color: #dc2626; }
+    .vid-thumb {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      background: #0f172a; display: block;
+    }
+    .vid-thumb-placeholder {
+      width: 100%; aspect-ratio: 16/9; background: #0f172a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; color: #334155;
+    }
+    .vid-body { padding: 12px; }
+    .vid-platform-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px; margin-bottom: 6px;
+    }
+    .vid-platform-badge.tiktok    { background: #010101; color: #fff; border: 1px solid #333; }
+    .vid-platform-badge.instagram { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+    .vid-alert-tag {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; margin-left: 6px;
+      background: #7f1d1d; color: #fca5a5;
+    }
+    .vid-title {
+      font-size: 13px; font-weight: 600; color: #e2e8f0; line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden; margin-bottom: 8px;
+    }
+    .vid-meta { display: flex; justify-content: space-between; font-size: 11px; color: #64748b; }
+
+    /* ── Alert Tab badge ── */
+    .alert-badge {
+      background: #dc2626;
+      color: #fff !important;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 700;
+      animation: badgePulse 2s infinite;
+    }
+    @keyframes badgePulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+    /* ── Alert Center Layout ── */
+    .alert-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 24px;
+      padding: 24px 32px;
+      max-width: 1900px;
+      margin: 0 auto;
+    }
+
+    /* ── Sidebar: keyword config ── */
+    .alert-sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+    .alert-panel {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .alert-panel-title {
+      background: #222;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #ccc;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #2a2a2a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .alert-panel-body { padding: 14px 16px; }
+
+    /* Keyword input */
+    .kw-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+    .kw-input {
+      flex: 1;
+      background: #111;
+      border: 1px solid #333;
+      color: #fff;
+      font-size: 0.82rem;
+      padding: 7px 10px;
+      border-radius: 8px;
+      outline: none;
+      min-width: 0;
+    }
+    .kw-input:focus { border-color: #e55; }
+    .kw-add-btn {
+      background: #dc2626;
+      border: none;
+      color: #fff;
+      font-size: 0.82rem;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .kw-add-btn:hover { background: #b91c1c; }
+
+    .kw-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .kw-tag {
+      background: #2a1a1a;
+      border: 1px solid #dc262644;
+      color: #fca5a5;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .kw-tag button {
+      background: none;
+      border: none;
+      color: #dc2626;
+      cursor: pointer;
+      font-size: 0.9rem;
+      line-height: 1;
+      padding: 0;
+    }
+
+    /* Severity legend */
+    .sev-row { display: flex; flex-direction: column; gap: 8px; }
+    .sev-item { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: #aaa; }
+    .sev-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* Monitor targets */
+    .target-list { display: flex; flex-direction: column; gap: 6px; }
+    .target-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #aaa;
+      padding: 5px 0;
+      border-bottom: 1px solid #222;
+    }
+    .target-item:last-child { border-bottom: none; }
+    .target-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .target-name { flex: 1; }
+    .target-toggle {
+      width: 32px; height: 18px;
+      background: #16a34a;
+      border-radius: 9px;
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .target-toggle::after {
+      content: '';
+      position: absolute;
+      width: 14px; height: 14px;
+      background: #fff;
+      border-radius: 50%;
+      top: 2px; right: 2px;
+      transition: right 0.2s;
+    }
+
+    /* Demo notice */
+    .demo-notice {
+      background: #1a1500;
+      border: 1px solid #ca8a0444;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      color: #fcd34d;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    /* ── Alert Log (right panel) ── */
+    .alert-log-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .alert-log-title { font-size: 1.1rem; font-weight: 700; }
+    .alert-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #888;
+      font-size: 0.76rem;
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active { background: #252525; color: #fff; border-color: #666; }
+    .filter-btn.f-high.active  { background: #4c0d0d; border-color: #dc2626; color: #fca5a5; }
+    .filter-btn.f-med.active   { background: #431407; border-color: #ea580c; color: #fdba74; }
+    .filter-btn.f-low.active   { background: #1c2a1a; border-color: #16a34a; color: #86efac; }
+
+    .alert-items { display: flex; flex-direction: column; gap: 10px; }
+
+    .alert-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-left: 4px solid #555;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .alert-card:hover { background: #202020; }
+    .alert-card.sev-high { border-left-color: #dc2626; }
+    .alert-card.sev-med  { border-left-color: #ea580c; }
+    .alert-card.sev-low  { border-left-color: #16a34a; }
+    .alert-card.unread { background: #1c1c2a; }
+
+    .alert-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .alert-body { flex: 1; min-width: 0; }
+    .alert-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+    }
+    .alert-brand {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: #222;
+      color: #ccc;
+    }
+    .alert-kw {
+      font-size: 0.72rem;
+      background: #2a1515;
+      color: #fca5a5;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .alert-time { font-size: 0.7rem; color: #555; margin-left: auto; white-space: nowrap; }
+    .alert-source { font-size: 0.8rem; font-weight: 700; color: #ddd; margin-bottom: 4px; }
+    .alert-text {
+      font-size: 0.82rem;
+      color: #999;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .alert-text mark {
+      background: #3d1515;
+      color: #fca5a5;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    .alert-actions { display: flex; gap: 6px; margin-top: 8px; }
+    .alert-act-btn {
+      font-size: 0.72rem;
+      background: #222;
+      border: 1px solid #333;
+      color: #888;
+      padding: 3px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .alert-act-btn:hover { background: #2a2a2a; color: #fff; }
+
+    .alert-unread-dot {
+      width: 8px; height: 8px;
+      background: #dc2626;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #111;
+      border-top: 1px solid #1e1e1e;
+      padding: 18px 32px;
+      text-align: center;
+      color: #444;
+      font-size: 0.78rem;
+      margin-top: 8px;
+    }
+    footer strong { color: #666; }
+
+    @media (max-width: 800px) {
+      .content { padding: 16px; }
+      header { flex-direction: column; gap: 10px; text-align: center; }
+      .tab-bar { padding: 0 12px; overflow-x: auto; }
+    }
+    @media (max-width: 500px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <svg class="bmw-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="98" fill="none" stroke="white" stroke-width="4"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M100,20 A80,80 0 0,0 20,100 L100,100 Z" fill="white"/>
+      <path d="M100,20 A80,80 0 0,1 180,100 L100,100 Z" fill="#1c69d4"/>
+      <path d="M20,100 A80,80 0 0,0 100,180 L100,100 Z" fill="#1c69d4"/>
+      <path d="M100,180 A80,80 0 0,0 180,100 L100,100 Z" fill="white"/>
+      <text x="100" y="115" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="26" fill="#1c69d4">BMW</text>
+    </svg>
+    <div>
+      <h1>BMW 台灣 Facebook 監控儀表板</h1>
+      <p>BMW 授權經銷商 · 競品品牌即時動態</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <div>最後載入時間</div>
+    <div id="updated-time">—</div>
+    <button class="refresh-btn" onclick="location.reload()">↻ 重新整理</button>
+  </div>
+</header>
+
+<!-- Tab Bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('bmw', this)">
+    🚗 BMW 授權經銷商 <span class="badge">14 家</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('competitor', this)">
+    🏁 競品監控 <span class="badge">賓士 · 奧迪 · Porsche</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('overview', this)">
+    📈 本週概覽
+  </button>
+
+  <button class="tab-btn" onclick="switchTab('video', this)">
+    🎬 影片監控 <span class="badge alert-badge" id="video-alert-badge" style="display:none">0</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('buzz', this)">
+    📊 聲量分析
+  </button>
+</div>
+
+<div class="status-bar">
+  <div class="dot"></div>
+  <span id="status-text">即時顯示 BMW 授權經銷商最新 Facebook 動態</span>
+</div>
+
+<!-- ════ BMW Tab ════ -->
+<div class="tab-panel active" id="panel-bmw">
+  <div class="content" id="bmw-content"></div>
+</div>
+
+<!-- ════ Competitor Tab ════ -->
+<div class="tab-panel" id="panel-competitor">
+  <div class="content" id="competitor-content"></div>
+</div>
+
+<!-- ════ Overview Tab ════ -->
+<div class="tab-panel" id="panel-overview">
+  <div style="padding:20px 24px">
+
+    <!-- API Key Setup -->
+    <div id="yt-key-banner" style="display:none;background:#1a2a1a;border:1px solid #2d5a2d;border-radius:10px;padding:16px 20px;margin-bottom:20px">
+      <div style="font-size:0.9rem;color:#7ecf7e;font-weight:600;margin-bottom:8px">🔑 需要 YouTube Data API Key</div>
+      <div style="font-size:0.8rem;color:#888;margin-bottom:12px">
+        免費申請：<a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" style="color:#4a9eff">Google Cloud Console</a>
+        → 啟用 YouTube Data API v3 → 建立 API 金鑰
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input id="yt-key-input" type="password" placeholder="貼上 API Key..."
+          style="flex:1;background:#111;border:1px solid #333;border-radius:6px;padding:8px 12px;color:#fff;font-size:0.85rem;outline:none" />
+        <button onclick="saveYTKey()" style="background:#1c69d4;color:#fff;border:none;border-radius:6px;padding:8px 18px;cursor:pointer;font-size:0.85rem">儲存</button>
+        <button onclick="clearYTKey()" id="yt-clear-btn" style="background:#333;color:#aaa;border:none;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:0.8rem;display:none">清除</button>
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div style="font-size:1rem;font-weight:700;color:#ddd">📺 YouTube 官方頻道本週概覽</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span id="yt-scan-label" style="font-size:0.78rem;color:#888"></span>
+        <button onclick="refreshYT()" style="background:#222;color:#aaa;border:1px solid #333;border-radius:6px;padding:4px 12px;font-size:0.78rem;cursor:pointer">🔄 重新抓取</button>
+        <button onclick="showYTKey()" style="background:#222;color:#666;border:1px solid #2a2a2a;border-radius:6px;padding:4px 12px;font-size:0.78rem;cursor:pointer">⚙ API Key</button>
+      </div>
+    </div>
+
+    <!-- Stat Cards -->
+    <div id="yt-stat-cards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px"></div>
+
+    <!-- Comparison Table -->
+    <div style="background:#141414;border:1px solid #222;border-radius:10px;padding:18px;margin-bottom:20px">
+      <div style="font-size:0.9rem;font-weight:600;color:#ddd;margin-bottom:14px">頻道數據比較</div>
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+        <thead>
+          <tr style="color:#666;border-bottom:1px solid #2a2a2a;text-align:center">
+            <th style="text-align:left;padding:8px 10px">品牌頻道</th>
+            <th style="padding:8px 10px">訂閱人數</th>
+            <th style="padding:8px 10px">近30天影片數</th>
+            <th style="padding:8px 10px">近5支平均觀看</th>
+            <th style="padding:8px 10px">近5支平均按讚</th>
+            <th style="padding:8px 10px">最新上傳</th>
+          </tr>
+        </thead>
+        <tbody id="yt-compare-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Recent Videos -->
+    <div style="background:#141414;border:1px solid #222;border-radius:10px;padding:18px">
+      <div style="font-size:0.9rem;font-weight:600;color:#ddd;margin-bottom:14px">近期影片（各品牌最新 3 支）</div>
+      <div id="yt-recent-videos" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ Video Tab ════ -->
+<div class="tab-panel" id="panel-video">
+  <div style="padding:20px 24px">
+
+    <div style="margin-bottom:20px">
+      <span style="font-size:18px;font-weight:700;color:#e2e8f0">🎬 影片監控</span>
+    </div>
+
+    <!-- ── 精選熱門影片（YouTube 自動抓取）── -->
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:10px;padding:20px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div style="font-size:14px;font-weight:700;color:#e2e8f0">🔥 精選熱門影片</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span id="hot-label" style="font-size:0.72rem;color:#888"></span>
+          <button onclick="refreshHotVideos()" style="background:#1e3a5f;color:#7eb8f7;border:1px solid #2a5a8f;border-radius:5px;padding:3px 10px;font-size:0.72rem;cursor:pointer">🔄 重新抓取</button>
+        </div>
+      </div>
+      <div style="font-size:12px;color:#64748b;margin-bottom:14px">近 30 天 BMW 相關 YouTube 熱門影片 · 依觀看數排序 · 每日自動更新</div>
+
+      <!-- 關鍵字切換 -->
+      <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
+        <button id="htab-tw"    onclick="switchHotTab('tw')"    style="background:#1c69d4;color:#fff;border:none;border-radius:5px;padding:3px 12px;font-size:0.75rem;cursor:pointer">BMW 台灣</button>
+        <button id="htab-biz"   onclick="switchHotTab('biz')"   style="background:#333;color:#aaa;border:none;border-radius:5px;padding:3px 12px;font-size:0.75rem;cursor:pointer">BMW 業務</button>
+        <button id="htab-drive" onclick="switchHotTab('drive')"  style="background:#333;color:#aaa;border:none;border-radius:5px;padding:3px 12px;font-size:0.75rem;cursor:pointer">BMW 試駕</button>
+        <button id="htab-new"   onclick="switchHotTab('new')"   style="background:#333;color:#aaa;border:none;border-radius:5px;padding:3px 12px;font-size:0.75rem;cursor:pointer">BMW 新車</button>
+      </div>
+
+      <!-- 影片 Grid -->
+      <div id="hot-videos-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+        <div style="color:#555;font-size:0.8rem;padding:20px 0">⏳ 載入中...</div>
+      </div>
+    </div>
+
+
+    <!-- ══ YouTube Shorts 自動監控 ══ -->
+    <div style="background:#0d1f0d;border:1px solid #1a4a1a;border-radius:10px;padding:20px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div style="font-size:14px;font-weight:700;color:#7ecf7e">▶ YouTube Shorts 自動監控</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span id="shorts-label" style="font-size:0.72rem;color:#888"></span>
+          <button onclick="refreshShorts()" style="background:#1a3a1a;color:#7ecf7e;border:1px solid #2d5a2d;border-radius:5px;padding:3px 10px;font-size:0.72rem;cursor:pointer">🔄 重新抓取</button>
+        </div>
+      </div>
+      <div style="font-size:12px;color:#4a7a4a;margin-bottom:14px">各品牌頻道近30天 Shorts · 每日自動更新（使用 YouTube API Key）</div>
+
+      <!-- 品牌 Tab 切換 -->
+      <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
+        <button id="stab-bmw"     onclick="switchShortsTab('bmw')"     style="background:#1c69d4;color:#fff;border:none;border-radius:5px;padding:4px 14px;font-size:0.78rem;cursor:pointer">BMW</button>
+        <button id="stab-mb"      onclick="switchShortsTab('mb')"      style="background:#333;color:#aaa;border:none;border-radius:5px;padding:4px 14px;font-size:0.78rem;cursor:pointer">賓士</button>
+        <button id="stab-audi"    onclick="switchShortsTab('audi')"    style="background:#333;color:#aaa;border:none;border-radius:5px;padding:4px 14px;font-size:0.78rem;cursor:pointer">Audi</button>
+        <button id="stab-porsche" onclick="switchShortsTab('porsche')" style="background:#333;color:#aaa;border:none;border-radius:5px;padding:4px 14px;font-size:0.78rem;cursor:pointer">Porsche</button>
+        <button id="stab-kw"      onclick="switchShortsTab('kw')"      style="background:#333;color:#aaa;border:none;border-radius:5px;padding:4px 14px;font-size:0.78rem;cursor:pointer">🔍 關鍵字</button>
+      </div>
+
+      <!-- 內容區 -->
+      <div id="shorts-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px">
+        <div style="color:#555;font-size:0.8rem;padding:20px 0">⏳ 載入中...</div>
+      </div>
+    </div>
+
+    <script async src="https://www.tiktok.com/embed.js"></script>
+
+    <!-- TikTok Section -->
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:10px;padding:20px;margin-bottom:16px">
+      <div style="font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:4px">♪ TikTok</div>
+      <div style="font-size:12px;color:#64748b;margin-bottom:14px">關鍵字搜尋 / 直接前往含 BMW 帳號</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+        <button class="vsearch-btn" onclick="openSearch('tiktok','BMW業務')">BMW 業務</button>
+        <button class="vsearch-btn" onclick="openSearch('tiktok','BMW台灣試駕')">BMW 台灣試駕</button>
+        <button class="vsearch-btn" onclick="openSearch('tiktok','BMW台灣優惠')">BMW 台灣優惠</button>
+        <button class="vsearch-btn" onclick="openSearch('tiktok','BMW台灣新車')">BMW 台灣新車</button>
+        <button class="vsearch-btn" onclick="openSearch('tiktok','BMW交車')">BMW 交車</button>
+        <button class="vsearch-btn" onclick="openSearch('tiktok','BMW說車')">BMW 說車</button>
+        <button class="vsearch-btn" onclick="openSearch('tiktok','寶馬台灣業務')">寶馬台灣業務</button>
+        <button class="vsearch-btn vsearch-tag" onclick="openSearch('tiktok','#BMW台灣')">#BMW台灣</button>
+        <button class="vsearch-btn vsearch-tag" onclick="openSearch('tiktok','#BMW業務')">#BMW業務</button>
+        <button class="vsearch-btn vsearch-tag" onclick="openSearch('tiktok','#BMW購車')">#BMW購車</button>
+      </div>
+      <div style="border-top:1px solid #1e3a5f;padding-top:12px">
+        <div style="font-size:11px;color:#64748b;margin-bottom:10px">含 BMW 帳號 — 直接前往</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <button class="vsearch-btn vsearch-acct" onclick="window.open('https://www.tiktok.com/@bmwusa','_blank')">@bmwusa　BMW美國官方</button>
+          <button class="vsearch-btn vsearch-acct" onclick="window.open('https://www.tiktok.com/@hongyi1009','_blank')">@hongyi1009　台南汎德業務宥騰</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instagram Section -->
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:10px;padding:20px;margin-bottom:16px">
+      <div style="font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:4px">📷 Instagram</div>
+      <div style="font-size:12px;color:#64748b;margin-bottom:14px">搜尋 IG Reels / 貼文，或直接前往已知帳號</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button class="vsearch-btn" onclick="openSearch('instagram','BMW業務')">BMW 業務</button>
+        <button class="vsearch-btn" onclick="openSearch('instagram','BMW台灣試駕')">BMW 台灣試駕</button>
+        <button class="vsearch-btn" onclick="openSearch('instagram','BMW台灣優惠')">BMW 台灣優惠</button>
+        <button class="vsearch-btn" onclick="openSearch('instagram','BMW說車')">BMW 說車</button>
+        <button class="vsearch-btn vsearch-tag" onclick="openSearch('instagram','#BMW台灣')">#BMW台灣</button>
+        <button class="vsearch-btn vsearch-tag" onclick="openSearch('instagram','#BMW業務')">#BMW業務</button>
+      </div>
+      <div style="margin-top:14px;border-top:1px solid #1e3a5f;padding-top:14px">
+        <div style="font-size:11px;color:#64748b;margin-bottom:10px">含 BMW 帳號 — 直接前往</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <button class="vsearch-btn vsearch-acct" onclick="window.open('https://www.instagram.com/bmwtaiwan/','_blank')">@bmwtaiwan　BMW台灣官方</button>
+          <button class="vsearch-btn vsearch-acct" onclick="window.open('https://www.instagram.com/bmwlongder/','_blank')">@bmwlongder　台北鎔德</button>
+          <button class="vsearch-btn vsearch-acct" onclick="window.open('https://www.instagram.com/bmwmotorradtaiwan/','_blank')">@bmwmotorradtaiwan　BMW Motorrad 汎德</button>
+          <button class="vsearch-btn vsearch-acct" onclick="window.open('https://www.instagram.com/bmwtp/','_blank')">@bmwtp　（待確認）</button>
+          <button class="vsearch-btn vsearch-acct" onclick="window.open('https://www.instagram.com/bmwtwn/','_blank')">@bmwtwn　（待確認）</button>
+          <button class="vsearch-btn vsearch-acct" onclick="window.open('https://www.instagram.com/bmwhsinchu/','_blank')">@bmwhsinchu　（待確認）</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Facebook Section -->
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:10px;padding:20px;margin-bottom:16px">
+      <div style="font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:4px">📘 Facebook 影片</div>
+      <div style="font-size:12px;color:#64748b;margin-bottom:14px">前往 Facebook Watch 搜尋 BMW 相關業務影片</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button class="vsearch-btn" onclick="openSearch('facebook','BMW業務')">BMW 業務</button>
+        <button class="vsearch-btn" onclick="openSearch('facebook','BMW台灣試駕')">BMW 台灣試駕</button>
+        <button class="vsearch-btn" onclick="openSearch('facebook','BMW台灣優惠')">BMW 台灣優惠</button>
+        <button class="vsearch-btn" onclick="openSearch('facebook','BMW說車')">BMW 說車</button>
+        <button class="vsearch-btn" onclick="openSearch('facebook','BMW交車')">BMW 交車</button>
+      </div>
+    </div>
+
+    <!-- Custom search -->
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:10px;padding:20px">
+      <div style="font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:12px">🔍 自訂搜尋</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input id="custom-search-input" placeholder="輸入關鍵字…"
+          style="flex:1;min-width:180px;background:#0f172a;border:1px solid #334155;border-radius:6px;color:#e2e8f0;padding:8px 12px;font-size:13px"
+          onkeydown="if(event.key==='Enter') doCustomSearch()" />
+        <button class="vsearch-btn" onclick="doCustomSearch('tiktok')" style="background:#1a1a2e">♪ TikTok</button>
+        <button class="vsearch-btn" onclick="doCustomSearch('instagram')" style="background:#3b1d5e">📷 IG</button>
+        <button class="vsearch-btn" onclick="doCustomSearch('facebook')" style="background:#1a3a6e">📘 FB</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ 聲量分析 Tab ════ -->
+<div class="tab-panel" id="panel-buzz">
+  <div class="content">
+
+    <!-- Header row -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+      <div>
+        <div style="font-size:1.25rem;font-weight:700;color:#fff">📊 網路聲量分析</div>
+        <div style="font-size:0.8rem;color:#888;margin-top:4px">監測 PTT · 新聞媒體 各品牌討論熱度</div>
+        <div style="margin-top:8px">
+          <!-- ⚙️ Apps Script URL 設定（展開/收合） -->
+          <div style="margin-bottom:8px">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+              <button onclick="toggleScriptUrlRow()" id="script-url-toggle-btn"
+                style="background:#1e293b;border:1px solid #334155;border-radius:5px;padding:3px 10px;color:#94a3b8;font-size:0.72rem;cursor:pointer">⚙️ 設定 Apps Script URL</button>
+              <span id="buzz-sheet-status" style="font-size:0.72rem;color:#4caf50"></span>
+            </div>
+            <div id="script-url-row" style="display:none;margin-top:4px">
+              <div style="font-size:0.7rem;color:#64748b;margin-bottom:4px">貼入你的 Apps Script 網頁應用程式網址（格式：https://script.google.com/macros/s/…/exec），設定後每次開啟頁面自動抓取</div>
+              <div style="display:flex;gap:6px">
+                <input id="buzz-sheet-url" type="text"
+                  placeholder="https://script.google.com/macros/s/…/exec"
+                  style="flex:1;background:#111;border:1px solid #334155;border-radius:5px;padding:5px 8px;color:#ccc;font-size:0.72rem"
+                  onchange="onSheetUrlChange()" oninput="saveBuzzSheetUrl()">
+                <button onclick="onSheetUrlChange()" style="background:#1c69d4;color:#fff;border:none;border-radius:5px;padding:5px 12px;font-size:0.72rem;cursor:pointer">儲存並載入</button>
+              </div>
+            </div>
+          </div>
+          <!-- 📋 手動貼上（備用） -->
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+            <span style="font-size:0.72rem;color:#64748b">📋 或從 Google Sheets BuzzData 分頁手動複製貼上（Ctrl+A → Ctrl+C → 貼入下方）：</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:flex-start">
+            <textarea id="buzz-paste-area" rows="3"
+              placeholder="在 Google Sheets 開啟 BuzzData 分頁 → Ctrl+A 全選 → Ctrl+C 複製 → 在此貼上（Ctrl+V）"
+              style="flex:1;background:#111;border:1px solid #333;border-radius:5px;padding:6px 8px;color:#ccc;font-size:0.72rem;resize:vertical;font-family:monospace"
+              onpaste="setTimeout(parsePastedBuzz,100)"></textarea>
+            <button onclick="parsePastedBuzz()" style="background:#1c69d4;color:#fff;border:none;border-radius:5px;padding:6px 14px;font-size:0.75rem;cursor:pointer;white-space:nowrap">載入</button>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="display:flex;align-items:center;gap:10px;justify-content:flex-end">
+          <div id="buzz-scan-label" style="font-size:0.78rem;color:#888"></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
+          <button onclick="window.open('https://www.ptt.cc/bbs/car/index.html','_blank')"
+            style="background:#1c69d4;color:#fff;border:none;border-radius:6px;padding:5px 14px;font-size:0.8rem;cursor:pointer">
+            PTT 汽車板 ↗
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 時間區間選擇器 -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap">
+      <span style="font-size:0.78rem;color:#666">時間區間：</span>
+      <div id="buzz-range-btns" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    </div>
+
+    <!-- Rank cards -->
+    <div id="buzz-rank-cards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px"></div>
+
+    <!-- Bar chart section -->
+    <div style="background:#1a1a1a;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #2a2a2a">
+      <div style="font-size:0.95rem;font-weight:600;margin-bottom:16px;color:#ddd">各品牌本週討論量（各平台加總）</div>
+      <div id="buzz-bars"></div>
+    </div>
+
+    <!-- Platform breakdown table -->
+    <div style="background:#1a1a1a;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #2a2a2a">
+      <div style="font-size:0.95rem;font-weight:600;margin-bottom:14px;color:#ddd">平台分佈明細</div>
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+        <thead>
+          <tr style="color:#888;border-bottom:1px solid #2a2a2a">
+            <th style="text-align:left;padding:8px 12px">品牌</th>
+            <th style="text-align:center;padding:8px 12px">PTT</th>
+            <th style="text-align:center;padding:8px 12px">新聞媒體</th>
+            <th style="text-align:center;padding:8px 12px;color:#1c69d4">合計</th>
+          </tr>
+        </thead>
+        <tbody id="buzz-table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Threads manual input -->
+    <div style="background:#1a1a1a;border-radius:12px;padding:18px;margin-bottom:16px;border:1px solid #2a2a2a">
+      <div id="buzz-threads-manual"></div>
+    </div>
+
+    <!-- Hot topics -->
+    <div style="background:#1a1a1a;border-radius:12px;padding:20px;border:1px solid #2a2a2a">
+      <div style="font-size:0.95rem;font-weight:600;margin-bottom:14px;color:#ddd">🔥 本週熱門話題</div>
+      <div id="buzz-hot-topics"></div>
+    </div>
+
+    <!-- Shortcut links to search platforms -->
+    <div style="background:#141414;border-radius:12px;padding:18px;margin-top:16px;border:1px solid #222">
+      <div style="font-size:0.85rem;font-weight:600;color:#aaa;margin-bottom:10px">快速前往各平台搜尋</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button onclick="window.open('https://www.ptt.cc/bbs/car/search?q=BMW','_blank')" style="background:#333;color:#ddd;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">PTT BMW</button>
+        <button onclick="window.open('https://www.ptt.cc/bbs/car/search?q=%E8%B3%93%E5%A3%AB','_blank')" style="background:#333;color:#ddd;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">PTT 賓士</button>
+        <button onclick="window.open('https://www.ptt.cc/bbs/car/search?q=Audi','_blank')" style="background:#333;color:#ddd;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">PTT Audi</button>
+        <button onclick="window.open('https://www.ptt.cc/bbs/car/search?q=Porsche','_blank')" style="background:#333;color:#ddd;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">PTT Porsche</button>
+        <button onclick="window.open('https://www.mobile01.com/search.php?q=BMW&fs=1','_blank')" style="background:#2a4d2a;color:#aaffaa;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">Mobile01 BMW</button>
+        <button onclick="window.open('https://www.mobile01.com/search.php?q=%E8%B3%93%E5%A3%AB&fs=1','_blank')" style="background:#2a4d2a;color:#aaffaa;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">Mobile01 賓士</button>
+        <button onclick="window.open('https://www.dcard.tw/f/car?query=BMW','_blank')" style="background:#3d2a4d;color:#cc99ff;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">Dcard BMW</button>
+        <button onclick="window.open('https://news.google.com/search?q=BMW+台灣&hl=zh-TW','_blank')" style="background:#4d3a1a;color:#ffcc77;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">Google News BMW</button>
+        <button onclick="window.open('https://news.google.com/search?q=賓士+台灣&hl=zh-TW','_blank')" style="background:#4d3a1a;color:#ffcc77;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.82rem">Google News 賓士</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>BMW Taiwan Dealer & Competitor Facebook Dashboard</strong>
+  &nbsp;·&nbsp; 資料來源：Facebook Page Plugin &nbsp;·&nbsp; 請確保網路連線正常以載入動態
+</footer>
+
+<script>
+// ── Tab switch ──────────────────────────────────────────────
+function switchTab(name, btn) {
+  if (name === 'video') { setTimeout(loadHotVideos, 100); setTimeout(loadShorts, 400); }
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+  const labels = {
+    bmw:        '即時顯示 BMW 授權經銷商最新 Facebook 動態',
+    competitor: '即時顯示競品品牌（賓士 · 奧迪 · Porsche）最新 Facebook 動態',
+    overview:   '📊 本週品牌貼文統計 · 互動數比較 · 聲量趨勢（示範資料）',
+    alerts:     '⚠️ 示範模式 · 連接 Meta API 後啟用即時關鍵字監控',
+    buzz:       '📊 PTT 汽車板 · 新聞媒體 各品牌討論熱度監測'
+  };
+  document.getElementById('status-text').textContent = labels[name] || '';
+  if (name === 'buzz') { renderRangeButtons(); autoLoadBuzz(); }
+  if (name === 'overview') renderOverview();
+}
+
+// ── Iframe helper ───────────────────────────────────────────
+function buildSrc(pageId) {
+  const enc = encodeURIComponent('https://www.facebook.com/' + pageId + '/');
+  return `https://www.facebook.com/plugins/page.php?href=${enc}&tabs=timeline&width=340&height=480&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false`;
+}
+
+function showIframe(uid) {
+  const l = document.getElementById('lp-' + uid);
+  const f = document.getElementById('if-' + uid);
+  if (l) l.style.display = 'none';
+  if (f) f.style.display = 'block';
+}
+
+function buildCard(p, accentColor) {
+  const card = document.createElement('div');
+  card.className = 'page-card';
+  card.style.borderColor = accentColor + '44';
+
+  const uid = p.pageId;
+
+  card.innerHTML = `
+    <div class="card-header" style="background: linear-gradient(135deg, ${accentColor}dd, ${accentColor}88)">
+      <div class="card-icon">🏢</div>
+      <div class="card-title">
+        <h3>${p.name}</h3>
+        <span>${p.sub}</span>
+      </div>
+      <a class="card-link" href="${p.url}" target="_blank">前往專頁 ↗</a>
+    </div>
+    <div class="fb-embed-wrap">
+      <div class="loading-ph" id="lp-${uid}">
+        <div class="spinner" style="border-top-color:${accentColor}"></div>
+        <p>載入 Facebook 動態中…</p>
+      </div>
+      <iframe
+        id="if-${uid}"
+        src="${buildSrc(uid)}"
+        height="480"
+        scrolling="no" frameborder="0"
+        allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        onload="showIframe('${uid}')">
+      </iframe>
+    </div>`;
+
+  return card;
+}
+
+function buildSection(container, sectionDef) {
+  const sec = document.createElement('div');
+  const line = `<div class="section-line" style="background:${sectionDef.color}"></div>`;
+  sec.innerHTML = `
+    <div class="section-header" style="border-left-color:${sectionDef.color}">
+      <span class="section-icon">${sectionDef.icon}</span>
+      <span class="section-label">${sectionDef.label}</span>
+      <span class="section-sub">${sectionDef.sub}</span>
+      ${line}
+    </div>
+    <div class="cards-grid" id="cg-${sectionDef.id}"></div>`;
+  container.appendChild(sec);
+  const grid = sec.querySelector('#cg-' + sectionDef.id);
+  sectionDef.pages.forEach(p => grid.appendChild(buildCard(p, sectionDef.color)));
+}
+
+// ════ BMW DATA ═══════════════════════════════════════════════
+const bmwSections = [
+  {
+    id: 'hq', label: '總代理', icon: '🏢', color: '#1c69d4',
+    sub: '1 個帳號 · BMW Taiwan 官方',
+    pages: [
+      { name: 'BMW Taiwan 總代理 汎德', sub: 'BMW Taiwan 官方 Facebook', url: 'https://www.facebook.com/BMWTaiwanOfficial/', pageId: 'BMWTaiwanOfficial' },
+    ]
+  },
+  {
+    id: 'north', label: '北部', icon: '🏙️', color: '#1c69d4',
+    sub: '6 家經銷商 · 台北 桃園 新竹',
+    pages: [
+      { name: '台北汎德', sub: '台北市 BMW 授權經銷商', url: 'https://www.facebook.com/BMW.Taipei/',        pageId: 'BMW.Taipei' },
+      { name: '台北鎔德', sub: '台北市 BMW 授權經銷商', url: 'https://www.facebook.com/bmw.longder/',       pageId: 'bmw.longder' },
+      { name: '台北依德', sub: '台北市 BMW 授權經銷商', url: 'https://www.facebook.com/BMWTP/',             pageId: 'BMWTP' },
+      { name: '台北尚德', sub: '台北市 BMW 授權經銷商', url: 'https://www.facebook.com/BMWTWN/',            pageId: 'BMWTWN' },
+      { name: '桃園大桐', sub: '桃園市 BMW 授權經銷商', url: 'https://www.facebook.com/BMWTaoyuanTatung/', pageId: 'BMWTaoyuanTatung' },
+      { name: '新竹中鎂', sub: '新竹市 BMW 授權經銷商', url: 'https://www.facebook.com/BMWHSINCHU/',        pageId: 'BMWHSINCHU' },
+    ]
+  },
+  {
+    id: 'central', label: '中部', icon: '🌄', color: '#16a34a',
+    sub: '3 家經銷商 · 台中 南投 彰化',
+    pages: [
+      { name: '台中汎德', sub: '台中市 BMW 授權經銷商', url: 'https://www.facebook.com/TaichungBMW/',          pageId: 'TaichungBMW' },
+      { name: '南投長慶', sub: '南投縣 BMW 授權經銷商', url: 'https://www.facebook.com/BmwNanTouChangChing/', pageId: 'BmwNanTouChangChing' },
+      { name: '彰化昌一', sub: '彰化縣 BMW 授權經銷商', url: 'https://www.facebook.com/BMW.ChangE/',          pageId: 'BMW.ChangE' },
+    ]
+  },
+  {
+    id: 'south', label: '南部', icon: '🌞', color: '#d97706',
+    sub: '3 家經銷商 · 台南 高雄 嘉義',
+    pages: [
+      { name: '台南汎德', sub: '台南市 BMW 授權經銷商', url: 'https://www.facebook.com/BMWPGMTAINAN/',              pageId: 'BMWPGMTAINAN' },
+      { name: '高雄汎德', sub: '高雄市 BMW 授權經銷商', url: 'https://www.facebook.com/BMWkaoder/',                 pageId: 'BMWkaoder' },
+      { name: '嘉義賓歐', sub: '嘉義市 BMW 授權經銷商', url: 'https://www.facebook.com/bmw.chiayi.paneurope/', pageId: 'bmw.chiayi.paneurope' },
+    ]
+  },
+  {
+    id: 'east', label: '東部', icon: '🏔️', color: '#7c3aed',
+    sub: '1 家經銷商 · 宜蘭',
+    pages: [
+      { name: '蘭陽鎔德', sub: '宜蘭縣 BMW 授權經銷商', url: 'https://www.facebook.com/bmw.lanyang/', pageId: 'bmw.lanyang' },
+    ]
+  },
+];
+
+// ════ COMPETITOR DATA ═════════════════════════════════════════
+const competitorSections = [
+  {
+    id: 'mb', label: 'Mercedes-Benz 賓士', icon: '⭐', color: '#c0c0c0',
+    sub: '官方 + 授權經銷商',
+    pages: [
+      { name: '台灣賓士官方',  sub: 'Mercedes-Benz Taiwan 官方',         url: 'https://www.facebook.com/MercedesBenzTaiwan/',   pageId: 'MercedesBenzTaiwan' },
+      { name: '中華賓士',      sub: '台灣賓士授權經銷商 · 台北',          url: 'https://www.facebook.com/CMI.MB/',               pageId: 'CMI.MB' },
+      { name: '聯立賓士',      sub: '台灣賓士授權經銷商 · 新竹/桃竹苗',  url: 'https://www.facebook.com/MercedesBenz.LienLi/',  pageId: 'MercedesBenz.LienLi' },
+      { name: '台隆賓士',      sub: '台灣賓士授權經銷商 · 台北',          url: 'https://www.facebook.com/tlmercedesbenz/',       pageId: 'tlmercedesbenz' },
+      { name: '德冠賓士',      sub: '台灣賓士授權經銷商 · 高雄',          url: 'https://www.facebook.com/MercedesBenzSupreme/',  pageId: 'MercedesBenzSupreme' },
+      { name: '賓航賓士',      sub: '台灣賓士授權經銷商 · 中和',          url: 'https://www.facebook.com/binhang.benz/',         pageId: 'binhang.benz' },
+      { name: '賓泓賓士',      sub: '台灣賓士授權經銷商 · 台南',          url: 'https://www.facebook.com/BwBenz.Taiwan/',        pageId: 'BwBenz.Taiwan' },
+      { name: '台明賓士',      sub: '台灣賓士授權經銷商',                 url: 'https://www.facebook.com/tmmercedesbenz/',       pageId: 'tmmercedesbenz' },
+      { name: '中彰賓士',      sub: '台灣賓士授權經銷商 · 台中',          url: 'https://www.facebook.com/chungchangmotors/',     pageId: 'chungchangmotors' },
+    ]
+  },
+  {
+    id: 'audi', label: 'Audi 奧迪', icon: '⬤', color: '#cc0000',
+    sub: '官方 + 授權經銷商',
+    pages: [
+      { name: 'Audi Taiwan 官方', sub: 'Audi Taiwan 台灣奧迪官方',       url: 'https://www.facebook.com/AudiTaiwan/',      pageId: 'AudiTaiwan' },
+      { name: '奧迪北區',         sub: '台灣奧迪授權經銷商 · 台北',      url: 'https://www.facebook.com/AudiTPN/',         pageId: 'AudiTPN' },
+      { name: '台奧北區',         sub: '台灣奧迪授權經銷商 · 新北/桃園', url: 'https://www.facebook.com/AudidealerTNS/',   pageId: 'AudidealerTNS' },
+    ]
+  },
+  {
+    id: 'porsche', label: 'Porsche 保時捷', icon: '🐎', color: '#b8982a',
+    sub: '官方 + 授權中心',
+    pages: [
+      { name: '台灣保時捷官方',    sub: 'Porsche Taiwan 官方',           url: 'https://www.facebook.com/PorscheTaiwan/',   pageId: 'PorscheTaiwan' },
+      { name: '汎德永業保時捷',    sub: '授權保時捷中心',                 url: 'https://www.facebook.com/PGUMLTD/',         pageId: 'PGUMLTD' },
+      { name: '台北保時捷中心',    sub: '台北市 Porsche Centre',          url: 'https://www.facebook.com/PorscheTaipei/',   pageId: 'PorscheTaipei' },
+      { name: '新北保時捷中心',    sub: '新北市 Porsche Centre',          url: 'https://www.facebook.com/PorscheNTC/',      pageId: 'PorscheNTC' },
+      { name: '桃園保時捷中心',    sub: '桃園市 Porsche Centre',          url: 'https://www.facebook.com/porsche.taoyuan/', pageId: 'porsche.taoyuan' },
+      { name: '台南保時捷中心',    sub: '台南市 Porsche Centre',          url: 'https://www.facebook.com/PorscheTainan/',   pageId: 'PorscheTainan' },
+    ]
+  },
+];
+
+// ── Build Pages ──────────────────────────────────────────────
+const bmwContainer  = document.getElementById('bmw-content');
+const compContainer = document.getElementById('competitor-content');
+
+bmwSections.forEach(s        => buildSection(bmwContainer,  s));
+competitorSections.forEach(s => buildSection(compContainer, s));
+
+// ── Timestamp ────────────────────────────────────────────────
+const now = new Date();
+document.getElementById('updated-time').textContent =
+  now.toLocaleDateString('zh-TW') + ' ' +
+  now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+
+
+// ════════════════════════════════════════════════════════════
+// ALERT CENTER
+// ════════════════════════════════════════════════════════════
+
+// ── Keywords (localStorage) ───────────────────────────────
+const DEFAULT_KEYWORDS_HIGH = ['現金折讓','零利率','貼息','補助方案','限量搶購','買贈','降幅','現折','召回','安全聲明','限時優惠','降價'];
+const DEFAULT_KEYWORDS_MED  = ['全新發表','正式上市','接單開始','預售開放','年度改款','特仕版','限定版','台灣首發','亞洲首發','新世代'];
+const DEFAULT_KEYWORDS_LOW  = ['賞車會','試乘體驗','展示會','新色發布','車主故事','品牌大使','媒體試駕'];
+const DEFAULT_KEYWORDS = [...DEFAULT_KEYWORDS_HIGH, ...DEFAULT_KEYWORDS_MED, ...DEFAULT_KEYWORDS_LOW];
+let keywords = JSON.parse(localStorage.getItem('bmw_kw') || 'null') || [...DEFAULT_KEYWORDS];
+function saveKw() { localStorage.setItem('bmw_kw', JSON.stringify(keywords)); }
+
+function renderKeywords() {
+  const list = document.getElementById('kw-list');
+  if (!list) return;
+  list.innerHTML = '';
+  keywords.forEach((kw, i) => {
+    const tag = document.createElement('div');
+    tag.className = 'kw-tag';
+    tag.innerHTML = kw + ' <button onclick="removeKw(' + i + ')">✕</button>';
+    list.appendChild(tag);
+  });
+}
+function addKeyword() {
+  const inp = document.getElementById('kw-input');
+  if (!inp) return;
+  const v = inp.value.trim();
+  if (v && !keywords.includes(v)) { keywords.push(v); saveKw(); renderKeywords(); }
+  inp.value = '';
+}
+function removeKw(i) { keywords.splice(i, 1); saveKw(); renderKeywords(); }
+
+// ── Alert state ───────────────────────────────────────────
+let alertData  = [];
+let noteData   = JSON.parse(localStorage.getItem('bmw_notes') || '[]');
+let alertFilter = 'all';
+
+function initAlerts() {
+  const live = window.LIVE_ALERTS || [];
+  if (window.DEMO_MODE !== false || !live.length) {
+    // demo alerts
+    alertData = [
+      {id:1,sev:'high',group:'mb',unread:true,icon:'[HIGH]',brand:'台灣賓士官方',keyword:'降價',time:'2 hr ago',source:'台灣賓士官方',text:'期間限定降價方案，全車系現折最高20萬，僅限本月！',link:'#',flagged:false},
+      {id:2,sev:'high',group:'bmw',unread:true,icon:'[HIGH]',brand:'台北氾德',keyword:'限時優惠',time:'5 hr ago',source:'台北氾德',text:'限時優惠！BMW 3系列本月交車享超值購車禮遇，名額有限。',link:'#',flagged:false},
+      {id:3,sev:'med',group:'audi',unread:false,icon:'[MED]',brand:'Audi Taiwan 官方',keyword:'新車',time:'1 day ago',source:'Audi Taiwan 官方',text:'全新Audi Q5正式上市，配備升級全面進化。',link:'#',flagged:false},
+      {id:4,sev:'med',group:'porsche',unread:false,icon:'[MED]',brand:'台灣保時捷官方',keyword:'發表',time:'2 days ago',source:'台灣保時捷官方',text:'Porsche Cayenne年度改款正式發表，動力全面升級。',link:'#',flagged:false},
+      {id:5,sev:'low',group:'mb',unread:false,icon:'[LOW]',brand:'中華賓士',keyword:'試駕',time:'3 days ago',source:'中華賓士',text:'全新試駕體驗活動開跑，預約享專屬好禮。',link:'#',flagged:false},
+    ];
+  } else {
+    alertData = live.map(a => ({ ...a, flagged: false }));
+  }
+  renderAlerts();
+  const badge = document.getElementById('alert-count-badge');
+  if (badge) badge.textContent = alertData.filter(a => a.unread).length || alertData.length;
+  renderKeywords();
+  renderNotes();
+}
+
+function renderAlerts() {
+  const container = document.getElementById('alert-items');
+  if (!container) return;
+  let filtered = alertData;
+  if (alertFilter === 'flagged') filtered = alertData.filter(a => a.flagged);
+  else if (['high','med','low'].includes(alertFilter)) filtered = alertData.filter(a => a.sev === alertFilter);
+  else if (['bmw','mb','audi','porsche'].includes(alertFilter)) filtered = alertData.filter(a => a.group === alertFilter);
+  if (!filtered.length) {
+    container.innerHTML = '<div style="color:#555;padding:20px;text-align:center">目前無符合條件的警示</div>';
+    return;
+  }
+  const sevColor = {high:'#ef4444',med:'#f97316',low:'#22c55e'};
+  container.innerHTML = filtered.map(a => {
+    const c = sevColor[a.sev] || '#888';
+    return '<div class="alert-card' + (a.unread ? ' unread' : '') + '" id="alert-' + a.id + '" style="border-left:4px solid ' + c + '">'
+      + '<div class="alert-header">'
+      + '<span class="alert-sev" style="color:' + c + '">' + a.icon + '</span>'
+      + '<span class="alert-brand">' + a.brand + '</span>'
+      + '<span class="alert-kw">🔑 ' + a.keyword + '</span>'
+      + '<span class="alert-time">' + a.time + '</span>'
+      + '<div class="alert-actions">'
+      + (a.flagged ? '<button class="action-btn flagged" onclick="flagAlert(' + a.id + ')">🚩</button>' : '<button class="action-btn" onclick="flagAlert(' + a.id + ')">🚩</button>')
+      + '<button class="action-btn" onclick="toggleRead(' + a.id + ')">' + (a.unread ? '✓ 標為已讀' : '↩ 標為未讀') + '</button>'
+      + '<button class="action-btn del" onclick="deleteAlert(' + a.id + ')">🗑</button>'
+      + '</div></div>'
+      + '<div class="alert-text">' + a.text + '</div>'
+      + (a.link && a.link !== '#' ? '<a href="' + a.link + '" target="_blank" class="alert-link">查看原文 ↗</a>' : '')
+      + '</div>';
+  }).join('');
+}
+
+function filterAlerts(type, btn) {
+  alertFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderAlerts();
+}
+function toggleRead(id) {
+  const a = alertData.find(x => x.id === id);
+  if (a) { a.unread = !a.unread; renderAlerts(); }
+}
+function flagAlert(id) {
+  const a = alertData.find(x => x.id === id);
+  if (a) { a.flagged = !a.flagged; renderAlerts(); }
+}
+function deleteAlert(id) {
+  alertData = alertData.filter(x => x.id !== id);
+  renderAlerts();
+}
+
+// ── Notes ─────────────────────────────────────────────────
+function renderNotes() {
+  const el = document.getElementById('notes-list');
+  if (!el) return;
+  if (!noteData.length) { el.innerHTML = '<div style="color:#555;font-size:0.85rem">尚無備註</div>'; return; }
+  el.innerHTML = noteData.map((n, i) =>
+    '<div class="note-item"><span>' + n.text + '</span><span style="color:#555;font-size:0.75rem">' + n.time + '</span>'
+    + '<button onclick="deleteNote(' + i + ')" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:0.75rem">✕</button></div>'
+  ).join('');
+}
+function addNote() {
+  const inp = document.getElementById('note-input');
+  if (!inp || !inp.value.trim()) return;
+  noteData.unshift({ text: inp.value.trim(), time: new Date().toLocaleString('zh-TW') });
+  localStorage.setItem('bmw_notes', JSON.stringify(noteData));
+  inp.value = '';
+  renderNotes();
+}
+function deleteNote(i) {
+  noteData.splice(i, 1);
+  localStorage.setItem('bmw_notes', JSON.stringify(noteData));
+  renderNotes();
+}
+
+// ── 精選熱門影片（YouTube 自動）────────────────────────────
+var HOT_TABS = {
+  tw:    'BMW 台灣',
+  biz:   'BMW 業務',
+  drive: 'BMW 試駕',
+  new:   'BMW 新車發表',
+};
+var hotActiveTab = 'tw';
+
+function refreshHotVideos() {
+  var today = new Date().toISOString().split('T')[0];
+  Object.keys(HOT_TABS).forEach(function(k){ localStorage.removeItem('yt_hot_' + k + '_' + today); });
+  loadHotVideos();
+}
+
+function switchHotTab(tab) {
+  hotActiveTab = tab;
+  Object.keys(HOT_TABS).forEach(function(k) {
+    var btn = document.getElementById('htab-' + k);
+    if (!btn) return;
+    btn.style.background = k === tab ? '#1c69d4' : '#333';
+    btn.style.color = k === tab ? '#fff' : '#aaa';
+  });
+  renderHotGrid();
+}
+
+function renderHotGrid() {
+  var grid = document.getElementById('hot-videos-grid');
+  if (!grid) return;
+  var today = new Date().toISOString().split('T')[0];
+  var items = null;
+  try { items = JSON.parse(localStorage.getItem('yt_hot_' + hotActiveTab + '_' + today)); } catch(e) {}
+  if (!items) {
+    grid.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:20px 0">⏳ 尚未載入，請點「重新抓取」</div>';
+    return;
+  }
+  if (!items.length) {
+    grid.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:20px 0">無資料</div>';
+    return;
+  }
+  grid.innerHTML = items.map(function(v) {
+    var age = '';
+    try {
+      var diff = Math.floor((Date.now() - new Date(v.publishedAt)) / 86400000);
+      age = diff === 0 ? '今天' : diff + ' 天前';
+    } catch(e) {}
+    var dur = v.duration || '';
+    var html = [];
+    html.push('<div style="background:#0f172a;border:1px solid #1e3a5f;border-radius:8px;overflow:hidden">');
+    html.push('<div style="position:relative;cursor:pointer" data-vid="' + v.id + '" onclick="playHotVideo(this.dataset.vid,this)">');
+    html.push('<img src="https://i.ytimg.com/vi/' + v.id + '/mqdefault.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block">');
+    html.push('<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3)">');
+    html.push('<div style="width:52px;height:52px;background:rgba(255,0,0,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px">&#9654;</div>');
+    html.push('</div>');
+    if (dur) html.push('<div style="position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,0.8);color:#fff;font-size:0.65rem;padding:2px 5px;border-radius:3px">' + dur + '</div>');
+    html.push('<div style="position:absolute;top:6px;left:6px;background:rgba(0,0,0,0.75);color:#ffcc00;font-size:0.65rem;padding:2px 6px;border-radius:3px">&#128293; ' + fmtNum(v.views) + ' 觀看</div>');
+    html.push('</div>');
+    html.push('<div style="padding:10px">');
+    html.push('<div style="font-size:0.8rem;color:#e2e8f0;font-weight:600;line-height:1.4;margin-bottom:6px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">' + v.title + '</div>');
+    html.push('<div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#64748b">');
+    html.push('<span>' + v.channel + '</span>');
+    html.push('<span>&#128077; ' + fmtNum(v.likes) + ' &nbsp; ' + age + '</span>');
+    html.push('</div>');
+    html.push('<a href="https://www.youtube.com/watch?v=' + v.id + '" target="_blank" style="display:inline-block;margin-top:8px;font-size:0.68rem;color:#4a9eff;text-decoration:none">&#128279; 在 YouTube 開啟</a>');
+    html.push('</div></div>');
+    return html.join('');
+  }).join('');
+}
+
+function playHotVideo(videoId, container) {
+  var iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+  iframe.style.cssText = 'width:100%;aspect-ratio:16/9;border:none;display:block';
+  iframe.allow = 'autoplay;encrypted-media';
+  container.innerHTML = '';
+  container.appendChild(iframe);
+}
+
+function parseDuration(iso) {
+  if (!iso) return '';
+  var m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!m) return '';
+  var h = parseInt(m[1]||0), mi = parseInt(m[2]||0), s = parseInt(m[3]||0);
+  if (h > 0) return h + ':' + String(mi).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  return mi + ':' + String(s).padStart(2,'0');
+}
+
+async function loadHotVideos() {
+  var apiKey = localStorage.getItem('yt_api_key');
+  var lbl = document.getElementById('hot-label');
+  if (!apiKey) { if(lbl) lbl.textContent = '⚠️ 需要 YouTube API Key（在本週概覽設定）'; return; }
+
+  var today = new Date().toISOString().split('T')[0];
+  // Check if current tab already cached
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem('yt_hot_' + hotActiveTab + '_' + today)); } catch(e) {}
+  if (cached) { if(lbl) lbl.textContent = '✅ 今日資料（' + today + '）'; renderHotGrid(); return; }
+
+  if(lbl) lbl.textContent = '⏳ 搜尋熱門影片...';
+  var base = 'https://www.googleapis.com/youtube/v3/';
+  var since = new Date(); since.setDate(since.getDate() - 30);
+
+  for (var tabKey in HOT_TABS) {
+    var cKey = 'yt_hot_' + tabKey + '_' + today;
+    var existing = null;
+    try { existing = JSON.parse(localStorage.getItem(cKey)); } catch(e) {}
+    if (existing) continue;
+
+    if(lbl) lbl.textContent = '⏳ 搜尋「' + HOT_TABS[tabKey] + '」...';
+    try {
+      var sr = await fetch(base + 'search?part=snippet&q=' + encodeURIComponent(HOT_TABS[tabKey])
+        + '&type=video&maxResults=9&order=viewCount'
+        + '&publishedAfter=' + since.toISOString()
+        + '&relevanceLanguage=zh-TW&regionCode=TW&key=' + apiKey);
+      var sj = await sr.json();
+      var items = (sj.items || []).filter(function(v){ return v.id && v.id.videoId; });
+      if (!items.length) { try { localStorage.setItem(cKey, JSON.stringify([])); } catch(e) {} continue; }
+
+      var ids = items.map(function(v){ return v.id.videoId; }).join(',');
+      var vr = await fetch(base + 'videos?part=statistics,contentDetails&id=' + ids + '&key=' + apiKey);
+      var vj = await vr.json();
+      var statsMap = {};
+      (vj.items || []).forEach(function(v){ statsMap[v.id] = v; });
+
+      var result = items.map(function(item) {
+        var vid = item.id.videoId;
+        var stat = (statsMap[vid] || {}).statistics || {};
+        var cd   = (statsMap[vid] || {}).contentDetails || {};
+        return {
+          id: vid,
+          title: item.snippet.title,
+          channel: item.snippet.channelTitle,
+          publishedAt: item.snippet.publishedAt,
+          views: parseInt(stat.viewCount) || 0,
+          likes: parseInt(stat.likeCount) || 0,
+          duration: parseDuration(cd.duration || ''),
+        };
+      }).sort(function(a,b){ return b.views - a.views; });
+
+      try { localStorage.setItem(cKey, JSON.stringify(result)); } catch(e) {}
+      await new Promise(function(r){ setTimeout(r, 300); });
+    } catch(e) { console.warn('hot fetch error:', e); }
+  }
+
+  if(lbl) lbl.textContent = '✅ 更新於 ' + new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
+  renderHotGrid();
+}
+
+// ── YouTube Shorts 監控 ──────────────────────────────────
+var shortsActiveTab = 'bmw';
+var SHORTS_KEYWORDS = [
+  {label:'BMW 台灣', q:'BMW 台灣 Shorts'},
+  {label:'BMW 試駕', q:'BMW 試駕 Shorts'},
+  {label:'BMW 業務', q:'BMW 業務 Shorts'},
+];
+
+function refreshShorts() {
+  var today = new Date().toISOString().split('T')[0];
+  localStorage.removeItem('yt_shorts_' + today);
+  loadShorts();
+}
+
+function switchShortsTab(tab) {
+  shortsActiveTab = tab;
+  ['bmw','mb','audi','porsche','kw'].forEach(function(t) {
+    var btn = document.getElementById('stab-' + t);
+    if (!btn) return;
+    var ch = YT_CHANNELS.find(function(c){ return c.key === t; });
+    var color = ch ? ch.color : '#888';
+    btn.style.background = (t === tab) ? color : '#333';
+    btn.style.color = (t === tab) ? '#fff' : '#aaa';
+  });
+  if (tab === 'kw') {
+    document.getElementById('stab-kw').style.background = '#444';
+  }
+  renderShortsGrid();
+}
+
+function renderShortsGrid() {
+  var grid = document.getElementById('shorts-grid');
+  if (!grid) return;
+  var today = new Date().toISOString().split('T')[0];
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem('yt_shorts_' + today)); } catch(e) {}
+  if (!cached) { grid.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:20px 0">⏳ 尚未載入，請點「重新抓取」</div>'; return; }
+
+  var items = shortsActiveTab === 'kw' ? (cached.kw || []) : (cached[shortsActiveTab] || []);
+  if (!items.length) { grid.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:20px 0">無資料</div>'; return; }
+
+  grid.innerHTML = items.map(function(v) {
+    var age = '';
+    try {
+      var d = new Date(v.publishedAt);
+      var diff = Math.floor((Date.now() - d) / 86400000);
+      age = diff === 0 ? '今天' : diff + ' 天前';
+    } catch(e) {}
+    var html = [];
+    html.push('<a href="' + v.url + '" target="_blank" style="text-decoration:none;display:block;background:#0a1a0a;border:1px solid #1a3a1a;border-radius:8px;overflow:hidden">');
+    html.push('<div style="position:relative">');
+    if (v.thumbnail) html.push('<img src="' + v.thumbnail + '" style="width:100%;aspect-ratio:9/16;object-fit:cover;display:block">');
+    html.push('<div style="position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,0.75);color:#fff;font-size:0.65rem;padding:2px 5px;border-radius:3px">&#9654; ' + fmtNum(v.views) + '</div>');
+    html.push('</div>');
+    html.push('<div style="padding:8px">');
+    html.push('<div style="font-size:0.72rem;color:#ccc;line-height:1.3;margin-bottom:4px;overflow:hidden">' + v.title.substring(0,60) + '</div>');
+    html.push('<div style="display:flex;justify-content:space-between;font-size:0.65rem;color:#555">');
+    html.push('<span>&#128077; ' + fmtNum(v.likes) + '</span><span>' + age + '</span>');
+    html.push('</div></div></a>');
+    return html.join('');
+  }).join('');
+}
+
+function fmtNum(n) {
+  if (!n) return '0';
+  if (n >= 10000) return (n/10000).toFixed(1) + '萬';
+  if (n >= 1000) return (n/1000).toFixed(1) + 'K';
+  return n.toString();
+}
+
+async function loadShorts() {
+  var apiKey = localStorage.getItem('yt_api_key');
+  var lbl = document.getElementById('shorts-label');
+  if (!apiKey) { if(lbl) lbl.textContent = '⚠️ 需要 YouTube API Key（在本週概覽分頁設定）'; return; }
+
+  var today = new Date().toISOString().split('T')[0];
+  var cKey = 'yt_shorts_' + today;
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem(cKey)); } catch(e) {}
+  if (cached) {
+    if(lbl) lbl.textContent = '✅ 今日資料（' + today + '）';
+    renderShortsGrid();
+    return;
+  }
+
+  if(lbl) lbl.textContent = '⏳ 抓取中...';
+  var result = {};
+
+  // 各品牌頻道 Shorts
+  for (var i = 0; i < YT_CHANNELS.length; i++) {
+    var ch = YT_CHANNELS[i];
+    if(lbl) lbl.textContent = '⏳ 抓取 ' + ch.label + '...';
+    try {
+      result[ch.key] = await fetchShortsFromChannel(ch.handle, apiKey, 9);
+    } catch(e) { result[ch.key] = []; }
+    await new Promise(function(r){ setTimeout(r, 300); });
+  }
+
+  // 關鍵字搜尋
+  if(lbl) lbl.textContent = '⏳ 關鍵字搜尋...';
+  try {
+    result.kw = await fetchShortsByKeyword('BMW 台灣', apiKey, 9);
+  } catch(e) { result.kw = []; }
+
+  try { localStorage.setItem(cKey, JSON.stringify(result)); } catch(e) {}
+  if(lbl) lbl.textContent = '✅ 更新於 ' + new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
+  renderShortsGrid();
+}
+
+async function fetchShortsFromChannel(handle, apiKey, maxResults) {
+  var base = 'https://www.googleapis.com/youtube/v3/';
+  // 取得 channel ID
+  var cr = await fetch(base + 'channels?part=id&forHandle=' + handle + '&key=' + apiKey);
+  var cj = await cr.json();
+  var chId = cj.items && cj.items[0] && cj.items[0].id;
+  if (!chId) return [];
+
+  // 搜尋近30天 Shorts
+  var since = new Date(); since.setDate(since.getDate() - 30);
+  var sr = await fetch(base + 'search?part=snippet&channelId=' + chId
+    + '&q=%23shorts&type=video&videoDuration=short&maxResults=' + maxResults
+    + '&order=viewCount&publishedAfter=' + since.toISOString() + '&key=' + apiKey);
+  var sj = await sr.json();
+  var items = (sj.items || []).filter(function(v){ return v.id && v.id.videoId; });
+  if (!items.length) return [];
+
+  return await enrichWithStats(items, apiKey);
+}
+
+async function fetchShortsByKeyword(keyword, apiKey, maxResults) {
+  var base = 'https://www.googleapis.com/youtube/v3/';
+  var since = new Date(); since.setDate(since.getDate() - 30);
+  var sr = await fetch(base + 'search?part=snippet&q=' + encodeURIComponent(keyword + ' #shorts')
+    + '&type=video&videoDuration=short&maxResults=' + maxResults
+    + '&order=viewCount&publishedAfter=' + since.toISOString()
+    + '&relevanceLanguage=zh-TW&key=' + apiKey);
+  var sj = await sr.json();
+  var items = (sj.items || []).filter(function(v){ return v.id && v.id.videoId; });
+  if (!items.length) return [];
+  return await enrichWithStats(items, apiKey);
+}
+
+async function enrichWithStats(items, apiKey) {
+  var base = 'https://www.googleapis.com/youtube/v3/';
+  var ids = items.map(function(v){ return v.id.videoId; }).join(',');
+  var vr = await fetch(base + 'videos?part=statistics,contentDetails&id=' + ids + '&key=' + apiKey);
+  var vj = await vr.json();
+  var statsMap = {};
+  (vj.items || []).forEach(function(v){ statsMap[v.id] = v.statistics || {}; });
+  return items.map(function(item) {
+    var vid = item.id.videoId;
+    var s = statsMap[vid] || {};
+    return {
+      id: vid,
+      title: item.snippet.title,
+      channel: item.snippet.channelTitle,
+      thumbnail: ((item.snippet.thumbnails.medium || item.snippet.thumbnails.default) || {}).url || '',
+      publishedAt: item.snippet.publishedAt,
+      views: parseInt(s.viewCount) || 0,
+      likes: parseInt(s.likeCount) || 0,
+      comments: parseInt(s.commentCount) || 0,
+      url: 'https://www.youtube.com/shorts/' + vid,
+    };
+  }).sort(function(a,b){ return b.views - a.views; });
+}
+
+// ── YouTube Overview ──────────────────────────────────────
+var YT_CHANNELS = [
+  {key:'bmw',    label:'BMW Taiwan 汎德',  color:'#1c69d4', handle:'BMWTWOFFCIAL'},
+  {key:'mb',     label:'Mercedes-Benz TW', color:'#aaaaaa', handle:'MercedesBenzTW'},
+  {key:'audi',   label:'Audi Taiwan',      color:'#bb2222', handle:'AudiTaiwan'},
+  {key:'porsche',label:'Porsche Taiwan',   color:'#d4a017', handle:'porschetaiwanofficial'},
+];
+
+function fmt(n){ if(!n) return '0'; n=parseInt(n); if(n>=10000) return (n/10000).toFixed(1)+'萬'; if(n>=1000) return (n/1000).toFixed(1)+'K'; return n+''; }
+function fmtDate(s){ if(!s) return '-'; var d=new Date(s); return (d.getMonth()+1)+'/'+(d.getDate()); }
+function saveYTKey(){ var k=document.getElementById('yt-key-input').value.trim(); if(!k) return; localStorage.setItem('yt_api_key',k); document.getElementById('yt-key-banner').style.display='none'; renderOverview(); }
+function clearYTKey(){ localStorage.removeItem('yt_api_key'); localStorage.removeItem('yt_'+new Date().toISOString().split('T')[0]); showYTKey(); }
+function showYTKey(){
+  var b=document.getElementById('yt-key-banner'); b.style.display='block';
+  var k=localStorage.getItem('yt_api_key')||'';
+  document.getElementById('yt-key-input').value=k;
+  document.getElementById('yt-clear-btn').style.display=k?'block':'none';
+}
+function refreshYT(){ localStorage.removeItem('yt_'+new Date().toISOString().split('T')[0]); renderOverview(); }
+
+async function fetchYTChannel(handle, apiKey){
+  var base='https://www.googleapis.com/youtube/v3/';
+  // Try forHandle first
+  var r=await fetch(base+'channels?part=snippet,statistics&forHandle='+handle+'&key='+apiKey);
+  var j=await r.json();
+  if(!j.items||!j.items.length){
+    // fallback forUsername
+    r=await fetch(base+'channels?part=snippet,statistics&forUsername='+handle+'&key='+apiKey);
+    j=await r.json();
+  }
+  if(!j.items||!j.items.length) return null;
+  var ch=j.items[0];
+  var chId=ch.id;
+  // Recent videos (last 30 days)
+  var since=new Date(); since.setDate(since.getDate()-30);
+  var vr=await fetch(base+'search?channelId='+chId+'&part=snippet&order=date&type=video&maxResults=10&publishedAfter='+since.toISOString()+'&key='+apiKey);
+  var vj=await vr.json();
+  var vids=vj.items||[];
+  // Get video stats for top 5
+  var ids=vids.slice(0,5).map(function(v){return v.id.videoId;}).join(',');
+  var statsArr=[];
+  if(ids){
+    var sr=await fetch(base+'videos?part=statistics,snippet&id='+ids+'&key='+apiKey);
+    var sj=await sr.json();
+    statsArr=sj.items||[];
+  }
+  var avgViews=0, avgLikes=0;
+  if(statsArr.length){
+    statsArr.forEach(function(v){ avgViews+=parseInt(v.statistics.viewCount||0); avgLikes+=parseInt(v.statistics.likeCount||0); });
+    avgViews=Math.round(avgViews/statsArr.length);
+    avgLikes=Math.round(avgLikes/statsArr.length);
+  }
+  return {
+    id:chId, title:ch.snippet.title,
+    subscribers:parseInt(ch.statistics.subscriberCount||0),
+    totalVideos:parseInt(ch.statistics.videoCount||0),
+    recentCount:vids.length,
+    avgViews:avgViews, avgLikes:avgLikes,
+    latestDate:vids.length?vids[0].snippet.publishedAt:'',
+    recentVideos:statsArr.slice(0,3).map(function(v){return{
+      title:v.snippet.title,
+      url:'https://www.youtube.com/watch?v='+v.id,
+      thumb:v.snippet.thumbnails.medium.url,
+      views:parseInt(v.statistics.viewCount||0),
+      likes:parseInt(v.statistics.likeCount||0),
+      date:v.snippet.publishedAt,
+    };}),
+  };
+}
+
+async function renderOverview(){
+  var apiKey=localStorage.getItem('yt_api_key');
+  var lbl=document.getElementById('yt-scan-label');
+  if(!apiKey){ showYTKey(); if(lbl) lbl.textContent='請先設定 API Key'; return; }
+  document.getElementById('yt-key-banner').style.display='none';
+  var today=new Date().toISOString().split('T')[0];
+  var cKey='yt_'+today;
+  var cached=null; try{cached=JSON.parse(localStorage.getItem(cKey));}catch(e){}
+  var data;
+  if(cached){ data=cached; if(lbl) lbl.textContent='✅ 今日資料（'+today+'）'; }
+  else{
+    if(lbl) lbl.textContent='⏳ 從 YouTube API 抓取中...';
+    data={};
+    for(var i=0;i<YT_CHANNELS.length;i++){
+      var ch=YT_CHANNELS[i];
+      if(lbl) lbl.textContent='⏳ 抓取（'+ch.label+'）...';
+      try{ var r=await fetchYTChannel(ch.handle,apiKey); if(r) data[ch.key]=r; }catch(e){}
+    }
+    var hasData=Object.keys(data).length>0;
+    if(hasData){ try{localStorage.setItem(cKey,JSON.stringify(data));}catch(e){} if(lbl) lbl.textContent='✅ 更新於 '+new Date().toLocaleString('zh-TW'); }
+    else{ if(lbl) lbl.textContent='❌ API Key 無效或配額已用完'; showYTKey(); return; }
+  }
+  // ── Render stat cards ────────────────────────────────────
+  var cards=document.getElementById('yt-stat-cards');
+  if(cards){ var ch2='';
+    YT_CHANNELS.forEach(function(ch){
+      var d=data[ch.key]||{}; var sub=d.subscribers||0;
+      ch2+='<div style="background:#141414;border:1px solid #222;border-top:3px solid '+ch.color+';border-radius:10px;padding:16px">'
+        +'<div style="font-size:0.82rem;color:'+ch.color+';font-weight:700;margin-bottom:8px">▶ '+ch.label+'</div>'
+        +'<div style="font-size:1.6rem;font-weight:800;color:#fff">'+fmt(sub)+'</div>'
+        +'<div style="font-size:0.72rem;color:#666;margin-top:2px">訂閱人數</div>'
+        +'<div style="margin-top:10px;display:flex;justify-content:space-between;font-size:0.78rem;color:#888">'
+        +'<span>近30天 <b style="color:#ccc">'+((d.recentCount)||0)+'</b> 支</span>'
+        +'<span>均觀看 <b style="color:#ccc">'+fmt(d.avgViews||0)+'</b></span></div></div>';
+    });
+    cards.innerHTML=ch2;
+  }
+  // ── Render compare table ─────────────────────────────────
+  var tbody=document.getElementById('yt-compare-body');
+  if(tbody){ var th='';
+    YT_CHANNELS.forEach(function(ch){
+      var d=data[ch.key]||{};
+      th+='<tr style="border-bottom:1px solid #1a1a1a">'
+        +'<td style="padding:10px;color:'+ch.color+';font-weight:600">'+ch.label+'</td>'
+        +'<td style="text-align:center;padding:10px;color:#ccc">'+fmt(d.subscribers||0)+'</td>'
+        +'<td style="text-align:center;padding:10px;color:#ccc">'+(d.recentCount||0)+' 支</td>'
+        +'<td style="text-align:center;padding:10px;color:#ccc">'+fmt(d.avgViews||0)+'</td>'
+        +'<td style="text-align:center;padding:10px;color:#ccc">'+fmt(d.avgLikes||0)+'</td>'
+        +'<td style="text-align:center;padding:10px;color:#888;font-size:0.8rem">'+fmtDate(d.latestDate||'')+'</td></tr>';
+    });
+    tbody.innerHTML=th;
+  }
+  // ── Render recent videos ─────────────────────────────────
+  var vidEl=document.getElementById('yt-recent-videos');
+  if(vidEl){ var vh='';
+    YT_CHANNELS.forEach(function(ch){
+      var d=data[ch.key]||{}; var vids=d.recentVideos||[];
+      if(!vids.length) return;
+      vh+='<div style="background:#1a1a1a;border-radius:8px;padding:14px">'
+        +'<div style="font-size:0.82rem;font-weight:700;color:'+ch.color+';margin-bottom:10px">▶ '+ch.label+'</div>';
+      vids.forEach(function(v){
+        vh+='<a href="'+v.url+'" target="_blank" style="display:flex;gap:10px;margin-bottom:10px;text-decoration:none;align-items:flex-start">'
+          +'<img src="'+v.thumb+'" style="width:100px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0">'
+          +'<div style="flex:1;min-width:0">'
+          +'<div style="font-size:0.8rem;color:#ccc;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">'+v.title+'</div>'
+          +'<div style="margin-top:4px;font-size:0.72rem;color:#666">👁 '+fmt(v.views)+' ｜ 👍 '+fmt(v.likes)+' ｜ '+fmtDate(v.date)+'</div>'
+          +'</div></a>';
+      });
+      vh+='</div>';
+    });
+    vidEl.innerHTML=vh||'<div style="color:#555">無近期影片資料</div>';
+  }
+}
+
+// ── Video Tab ─────────────────────────────────────────────
+let currentVidFilter = 'all';
+function filterVideos(filter, btn) {
+  currentVidFilter = filter;
+  document.querySelectorAll('.vid-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderVideos();
+}
+function renderVideos() {
+  const grid   = document.getElementById('video-grid');
+  const empty  = document.getElementById('video-empty');
+  const badge  = document.getElementById('video-alert-badge');
+  const info   = document.getElementById('video-scan-info');
+  const videos = window.LIVE_VIDEOS || [];
+  if (info) {
+    info.textContent = window.VIDEO_SCAN_TIME
+      ? '掃描時間：' + window.VIDEO_SCAN_TIME + '　共 ' + videos.length + ' 支影片'
+      : '尚未掃描';
+  }
+  if (badge) {
+    const ac = window.VIDEO_ALERT_COUNT || 0;
+    badge.textContent = ac;
+    badge.style.display = ac ? 'inline-block' : 'none';
+  }
+  let filtered = videos;
+  if (currentVidFilter === 'tiktok')    filtered = videos.filter(v => v.platform === 'tiktok');
+  if (currentVidFilter === 'instagram') filtered = videos.filter(v => v.platform === 'instagram');
+  if (currentVidFilter === 'alert')     filtered = videos.filter(v => v.alert);
+  if (!grid || !empty) return;
+  if (!filtered.length) { grid.style.display='none'; empty.style.display='block'; return; }
+  grid.style.display='grid'; empty.style.display='none';
+  grid.innerHTML = filtered.map(v => {
+    const pl = v.platform === 'instagram' ? '📷 Instagram' : '♪ TikTok';
+    const th = v.thumbnail ? '<img class="vid-thumb" src="' + v.thumbnail + '" alt="">' : '<div class="vid-thumb-placeholder">🎬</div>';
+    const at = v.alert ? '<span class="vid-alert-tag">⚡ 關鍵字</span>' : '';
+    return '<div class="vid-card' + (v.alert?' has-alert':'') + '" onclick="window.open(\'' + v.url + '\',\'_blank\')">'
+      + th + '<div class="vid-body"><div>'
+      + '<span class="vid-platform-badge ' + v.platform + '">' + pl + '</span>' + at
+      + '</div><div class="vid-title">' + v.title + '</div>'
+      + '<div class="vid-meta"><span>' + v.channel + '</span><span>' + v.views + ' 次觀看</span></div>'
+      + '<div class="vid-meta" style="margin-top:4px"><span>' + v.date + '</span><span>' + v.duration + '</span></div>'
+      + '</div></div>';
+  }).join('');
+}
+function openSearch(platform, keyword) {
+  const q = encodeURIComponent(keyword);
+  const urls = {
+    tiktok:    'https://www.tiktok.com/search?q=' + q,
+    instagram: 'https://www.instagram.com/explore/search/keyword/?q=' + q,
+    facebook:  'https://www.facebook.com/watch/search/?q=' + q,
+  };
+  window.open(urls[platform] || urls.tiktok, '_blank');
+}
+function doCustomSearch(platform) {
+  const kw = document.getElementById('custom-search-input');
+  if (kw && kw.value.trim()) openSearch(platform || 'tiktok', kw.value.trim());
+}
+function addEmbedVideo() {
+  const input = document.getElementById('embed-url-input');
+  if (!input) return;
+  const url = input.value.trim();
+  const ttMatch = url.match(/tiktok\.com\/@[\w.]+\/video\/(\d+)/);
+  if (ttMatch) {
+    const card = document.createElement('div');
+    card.className = 'embed-card';
+    card.innerHTML = '<div class="embed-label">📌 TikTok</div>'
+      + '<blockquote class="tiktok-embed" cite="' + url + '" data-video-id="' + ttMatch[1] + '" style="max-width:325px;min-width:325px">'
+      + '<section></section></blockquote>'
+      + '<button onclick="this.closest(\'.embed-card\').remove()" style="font-size:11px;color:#ef4444;background:none;border:none;cursor:pointer">✕ 移除</button>';
+    const fv = document.getElementById('featured-videos');
+    if (fv) fv.appendChild(card);
+    if (window.tiktok) window.tiktok.embed.render();
+    else { const s=document.createElement('script'); s.src='https://www.tiktok.com/embed.js'; document.body.appendChild(s); }
+    input.value = ''; return;
+  }
+  const igMatch = url.match(/instagram\.com\/(?:reel|p)\/([\w-]+)/);
+  if (igMatch) {
+    const card = document.createElement('div');
+    card.className = 'embed-card';
+    card.innerHTML = '<div class="embed-label">📌 Instagram Reel</div>'
+      + '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '" data-instgrm-version="14" style="max-width:325px;min-width:325px;margin:0">'
+      + '<a href="' + url + '">Instagram</a></blockquote>'
+      + '<button onclick="this.closest(\'.embed-card\').remove()" style="font-size:11px;color:#ef4444;background:none;border:none;cursor:pointer">✕ 移除</button>';
+    const fv = document.getElementById('featured-videos');
+    if (fv) fv.appendChild(card);
+    if (window.instgrm) window.instgrm.Embeds.process();
+    else { const s=document.createElement('script'); s.src='https://www.instagram.com/embed.js'; document.body.appendChild(s); }
+    input.value = ''; return;
+  }
+  alert('請貼入 TikTok 或 Instagram 影片連結');
+}
+
+// ── Buzz Analysis ─────────────────────────────────────────
+// Google Sheet CSV URL 設定
+var BUZZ_SHEET_URL_KEY = 'buzz_sheet_url';
+var BUZZ_SCRIPT_DEFAULT = 'https://script.google.com/macros/s/AKfycby92Oh4bcTdCQYIWguFkelENV0M7Et_-onAUzen-E5dcLv_8CHVcZDEq7uOOn2ILfwb1w/exec';
+function saveBuzzSheetUrl() {
+  var el = document.getElementById('buzz-sheet-url');
+  if (el) localStorage.setItem(BUZZ_SHEET_URL_KEY, el.value.trim());
+}
+function loadBuzzSheetUrlInput() {
+  var el = document.getElementById('buzz-sheet-url');
+  if (!el) return;
+  // 若 localStorage 未設定，自動帶入預設 URL
+  if (!localStorage.getItem(BUZZ_SHEET_URL_KEY)) {
+    localStorage.setItem(BUZZ_SHEET_URL_KEY, BUZZ_SCRIPT_DEFAULT);
+  }
+  el.value = localStorage.getItem(BUZZ_SHEET_URL_KEY) || BUZZ_SCRIPT_DEFAULT;
+}
+function toggleScriptUrlRow() {
+  var row = document.getElementById('script-url-row');
+  if (!row) return;
+  var isHidden = row.style.display === 'none';
+  row.style.display = isHidden ? 'block' : 'none';
+  if (isHidden) loadBuzzSheetUrlInput();
+}
+
+// URL 變更：自動儲存並立即載入
+function onSheetUrlChange() {
+  saveBuzzSheetUrl();
+  localStorage.removeItem('buzz_sheet_last_load');
+  autoLoadBuzz();
+}
+
+// 強制忽略快取，立即從 Sheet 重新載入
+function forceReloadFromSheet() {
+  localStorage.removeItem('buzz_sheet_last_load');
+  localStorage.removeItem(buzzCacheKey());
+  autoLoadBuzz();
+}
+
+// 解析使用者貼上的 CSV 資料（支援多月份累積）
+function parsePastedBuzz() {
+  var area = document.getElementById('buzz-paste-area');
+  var lbl  = document.getElementById('buzz-scan-label');
+  var st   = document.getElementById('buzz-sheet-status');
+  if (!area) return;
+  var text = area.value.trim();
+  if (!text || text.length < 10) {
+    if (lbl) lbl.textContent = '⚠️ 請先貼上資料';
+    return;
+  }
+  var sep = text.includes('\t') ? '\t' : ',';
+  var rows = text.split('\n').map(function(r){
+    return r.split(sep).map(function(c){ return c.trim().replace(/^"|"$/g,''); });
+  });
+  var headerRow = rows[0].map(function(h){ return h.toLowerCase(); });
+  var bi = headerRow.indexOf('brand');
+  var pi = headerRow.indexOf('ptt');
+  var ni = headerRow.indexOf('news');
+  var mi = headerRow.indexOf('month');
+  if (bi < 0 || pi < 0) {
+    if (lbl) lbl.textContent = '❌ 格式錯誤，找不到 brand/ptt 欄位';
+    return;
+  }
+  var allData = {};
+  var monthsFound = {};
+  rows.slice(1).forEach(function(cols) {
+    if (cols.length <= bi) return;
+    var brand = cols[bi].trim();
+    var ptt   = parseInt(cols[pi]) || 0;
+    var news  = ni >= 0 ? (parseInt(cols[ni]) || 0) : 0;
+    var month = mi >= 0 ? cols[mi].trim() : buzzMonthKey();
+    if (!brand || !month) return;
+    if (!allData[brand]) allData[brand] = {};
+    allData[brand][month] = { ptt: ptt, news: news };
+    monthsFound[month] = true;
+  });
+  var totalBrands = Object.keys(allData).length;
+  var totalMonths = Object.keys(monthsFound).length;
+  if (totalBrands === 0) {
+    if (lbl) lbl.textContent = '⚠️ 無資料，請先在 Apps Script 執行 fetchBuzzData()';
+    return;
+  }
+  try { localStorage.setItem('buzz_all_data', JSON.stringify(allData)); } catch(e) {}
+  localStorage.setItem('buzz_sheet_last_load', Date.now().toString());
+  rebuildBuzzCache();
+  if (lbl) lbl.textContent = '✅ 已載入 ' + totalBrands + ' 個品牌 × ' + totalMonths + ' 個月';
+  if (st)  st.textContent  = '上次更新 ' + new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
+  area.value = '';
+  renderBuzzDisplay();
+}
+
+// 根據時間範圍從歷史資料重建快取
+function rebuildBuzzCache() {
+  var allData = {};
+  try { allData = JSON.parse(localStorage.getItem('buzz_all_data')) || {}; } catch(e) {}
+  if (!Object.keys(allData).length) return;
+  var months = buzzRangeMonths();
+  var now = new Date();
+  var targetMonths = [];
+  for (var i = 0; i < months; i++) {
+    var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    targetMonths.push(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'));
+  }
+  var cKey = buzzCacheKey();
+  var cache = {};
+  BUZZ_BRANDS.forEach(function(b) {
+    var brandData = allData[b.key] || {};
+    var pttTotal = 0, newsTotal = 0, hasData = false;
+    targetMonths.forEach(function(m) {
+      if (brandData[m]) {
+        pttTotal  += brandData[m].ptt  || 0;
+        newsTotal += brandData[m].news || 0;
+        hasData = true;
+      }
+    });
+    cache[b.key] = {
+      ptt:  { count: pttTotal,  ok: hasData },
+      news: { count: newsTotal, ok: hasData },
+      anyOk: hasData,
+    };
+  });
+  try { localStorage.setItem(cKey, JSON.stringify(cache)); } catch(e) {}
+}
+
+// 自動決定資料來源：有 Script URL → 自動抓取；沒有 → 顯示快取或提示
+async function autoLoadBuzz() {
+  var sheetUrl = localStorage.getItem(BUZZ_SHEET_URL_KEY) || BUZZ_SCRIPT_DEFAULT;
+  // 確保 localStorage 有值
+  if (!localStorage.getItem(BUZZ_SHEET_URL_KEY)) localStorage.setItem(BUZZ_SHEET_URL_KEY, BUZZ_SCRIPT_DEFAULT);
+  var lbl = document.getElementById('buzz-scan-label');
+  loadBuzzSheetUrlInput();
+
+  if (!sheetUrl) {
+    // 未設定 Script URL：顯示快取或提示設定
+    var cKey0 = buzzCacheKey();
+    var cached0 = {};
+    try { cached0 = JSON.parse(localStorage.getItem(cKey0)) || {}; } catch(e) {}
+    var hasCached0 = BUZZ_BRANDS.some(function(b){ return cached0[b.key] && cached0[b.key].news; });
+    if (hasCached0) {
+      if (lbl) lbl.textContent = '📦 顯示上次資料・點⚙️設定 Script URL 可自動更新';
+      renderBuzzDisplay();
+    } else {
+      if (lbl) lbl.textContent = '⚙️ 請點上方按鈕設定 Apps Script URL，即可自動每日更新';
+    }
+    return;
+  }
+
+  // 已設定 URL：檢查今天是否已抓過（每日一次）
+  var lastLoad = parseInt(localStorage.getItem('buzz_sheet_last_load') || '0');
+  var today    = new Date(); today.setHours(0,0,0,0);
+  var stale    = lastLoad < today.getTime();
+
+  // 快取有效且今天已抓過 → 直接顯示
+  var cKey   = buzzCacheKey();
+  var cached = {};
+  try { cached = JSON.parse(localStorage.getItem(cKey)) || {}; } catch(e) {}
+  var hasCached = BUZZ_BRANDS.some(function(b){ return cached[b.key] && cached[b.key].news; });
+
+  if (hasCached && !stale) {
+    var lastTime = new Date(lastLoad).toLocaleTimeString('zh-TW', {hour:'2-digit', minute:'2-digit'});
+    if (lbl) lbl.textContent = '✅ 今日已更新（' + lastTime + '）';
+    renderBuzzDisplay();
+    return;
+  }
+
+  // 需要重新抓取
+  await loadFromSheet();
+}
+
+// 從 Google Sheet CSV 載入 PTT/Dcard 資料
+async function loadFromSheet() {
+  var sheetUrl = (document.getElementById('buzz-sheet-url')||{value:''}).value.trim()
+    || localStorage.getItem(BUZZ_SHEET_URL_KEY) || '';
+  if (!sheetUrl) {
+    alert('請先貼入 Google Sheet CSV 連結');
+    return;
+  }
+  var lbl = document.getElementById('buzz-scan-label');
+  if (lbl) lbl.textContent = '⏳ 讀取 Google Sheet...';
+
+  // 支援兩種 URL：
+  // 1. Google Sheets 分享連結（docs.google.com/spreadsheets）→ gviz JSONP
+  // 2. Apps Script Web App（script.google.com）→ JSONP
+  var rawUrl = sheetUrl.trim();
+  var isWebApp = rawUrl.includes('script.google.com');
+  var isSheets = rawUrl.includes('docs.google.com/spreadsheets') && !rawUrl.includes('/pub');
+  var csvUrl = rawUrl;
+  var rows = [];
+
+  if (isSheets) {
+    // Google Sheets gviz JSONP 模式
+    var sheetIdMatch = rawUrl.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+    if (!sheetIdMatch) {
+      if (lbl) lbl.textContent = '❌ 無法解析 Sheet ID，請貼入完整的試算表網址';
+      return;
+    }
+    var sheetId = sheetIdMatch[1];
+    var gvizUrl = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:json&sheet=BuzzData';
+    try {
+      var gvizData = await new Promise(function(resolve, reject) {
+        var cbName = '_gvizCb_' + Date.now();
+        var script = document.createElement('script');
+        var timer = setTimeout(function() {
+          if (script.parentNode) script.parentNode.removeChild(script);
+          delete window[cbName];
+          reject(new Error('timeout'));
+        }, 12000);
+        window[cbName] = function(data) {
+          clearTimeout(timer);
+          if (script.parentNode) script.parentNode.removeChild(script);
+          delete window[cbName];
+          resolve(data);
+        };
+        script.onerror = function() {
+          clearTimeout(timer);
+          if (script.parentNode) script.parentNode.removeChild(script);
+          delete window[cbName];
+          reject(new Error('script error'));
+        };
+        // gviz 使用 responseHandler 參數指定 callback
+        script.src = gvizUrl + '&responseHandler=' + cbName;
+        document.body.appendChild(script);
+      });
+
+      // 解析 gviz table 格式
+      if (gvizData && gvizData.table) {
+        var cols = gvizData.table.cols.map(function(c){ return c.label || c.id; });
+        var dataRows = gvizData.table.rows.map(function(r){
+          var obj = {};
+          cols.forEach(function(c, i){ obj[c] = r.c[i] ? r.c[i].v : null; });
+          return obj;
+        });
+        var cKey3 = buzzCacheKey();
+        var autoCache3 = {};
+        try { autoCache3 = JSON.parse(localStorage.getItem(cKey3)) || {}; } catch(e) {}
+        var loaded3 = 0;
+        dataRows.forEach(function(obj) {
+          var brand = String(obj.brand||'').trim();
+          var ptt   = parseInt(obj.ptt) || 0;
+          var news  = parseInt(obj.news) || 0;
+          var month = String(obj.month||'').trim();
+          if (!brand) return;
+          if (month && month !== buzzMonthKey()) return;
+          if (!autoCache3[brand]) autoCache3[brand] = {};
+          autoCache3[brand].ptt  = { count: ptt,  ok: true };
+          autoCache3[brand].news = { count: news, ok: true, topics: [] };
+          autoCache3[brand].anyOk = true;
+          loaded3++;
+        });
+        if (loaded3 > 0) {
+          try { localStorage.setItem(cKey3, JSON.stringify(autoCache3)); } catch(e) {}
+          if (lbl) lbl.textContent = '✅ 已載入 ' + loaded3 + ' 個品牌（' + buzzMonthLabel() + '）';
+          var st3=document.getElementById('buzz-sheet-status'); if(st3){ st3.textContent='上次更新 '+new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'}); }
+          renderBuzzDisplay();
+          return;
+        }
+        if (lbl) lbl.textContent = '⚠️ Sheet 內無本月（' + buzzMonthLabel() + '）資料，請先執行 Apps Script';
+        return;
+      }
+    } catch(e) { console.warn('gviz error:', e); }
+    if (lbl) lbl.textContent = '❌ 無法讀取 Sheet，請確認已設為「任何人可検視」';
+    return;
+  }
+
+  if (isWebApp) {
+    var waData = null;
+
+    // 優先：直接 fetch（https:// 環境 Apps Script 支援 CORS）
+    if (window.location.protocol === 'https:') {
+      try {
+        if (lbl) lbl.textContent = '⏳ 自動抓取中...';
+        var waResp = await fetch(rawUrl, { redirect: 'follow' });
+        if (waResp.ok) waData = await waResp.json();
+      } catch(e) { console.warn('Web App fetch error:', e); }
+    }
+
+    // 備用：JSONP（file:// 環境用）
+    if (!waData) {
+      try {
+        waData = await new Promise(function(resolve, reject) {
+          var cbName = '_buzzJsonp_' + Date.now();
+          var script = document.createElement('script');
+          var timer = setTimeout(function() {
+            if (script.parentNode) script.parentNode.removeChild(script);
+            delete window[cbName];
+            reject(new Error('timeout'));
+          }, 12000);
+          window[cbName] = function(data) {
+            clearTimeout(timer);
+            if (script.parentNode) script.parentNode.removeChild(script);
+            delete window[cbName];
+            resolve(data);
+          };
+          script.onerror = function() {
+            clearTimeout(timer);
+            if (script.parentNode) script.parentNode.removeChild(script);
+            delete window[cbName];
+            reject(new Error('script error'));
+          };
+          script.src = rawUrl + (rawUrl.includes('?') ? '&' : '?') + 'callback=' + cbName;
+          document.body.appendChild(script);
+        });
+      } catch(e) { console.warn('Web App JSONP error:', e); }
+    }
+
+    if (Array.isArray(waData) && waData.length > 0) {
+      // 儲存全部月份到 buzz_all_data（供時間範圍選擇器使用）
+      var allData2 = {};
+      try { allData2 = JSON.parse(localStorage.getItem('buzz_all_data')) || {}; } catch(e) {}
+      waData.forEach(function(obj) {
+        var brand = String(obj.brand||'').trim();
+        var ptt   = parseInt(obj.ptt) || 0;
+        var news  = parseInt(obj.news) || 0;
+        var month = String(obj.month||'').trim();
+        if (!brand || !month) return;
+        if (!allData2[brand]) allData2[brand] = {};
+        allData2[brand][month] = { ptt: ptt, news: news };
+      });
+      try { localStorage.setItem('buzz_all_data', JSON.stringify(allData2)); } catch(e) {}
+      localStorage.setItem('buzz_sheet_last_load', Date.now().toString());
+      rebuildBuzzCache();
+      var loaded2 = waData.length;
+      if (lbl) lbl.textContent = '✅ 已自動載入 ' + loaded2 + ' 筆資料';
+      var st2 = document.getElementById('buzz-sheet-status');
+      if (st2) st2.textContent = '自動更新 ' + new Date().toLocaleTimeString('zh-TW', {hour:'2-digit', minute:'2-digit'});
+      renderBuzzDisplay();
+      return;
+    }
+    if (lbl) lbl.textContent = '❌ 無法讀取 Web App，請確認部署設定';
+    return;
+  }
+
+  // CSV 模式
+  var text = '';
+  try {
+    var directResp = await fetch(csvUrl, {redirect:'follow'});
+    if (directResp.ok) text = await directResp.text();
+  } catch(e) {}
+  if (!text || text.length < 20) text = await proxyFetchRaw(csvUrl);
+  if (!text || text.length < 20) {
+    if (lbl) lbl.textContent = '❌ 無法讀取 Sheet，請確認已「發布至網路」';
+    return;
+  }
+
+  // 解析 CSV：brand, ptt, news, month, updated_at
+  var csvRows = text.trim().split('\n').slice(1); // 跳過標題
+  var cKey = buzzCacheKey();
+  var autoCache = {};
+  try { autoCache = JSON.parse(localStorage.getItem(cKey)) || {}; } catch(e) {}
+
+  var loaded = 0;
+  csvRows.forEach(function(row) {
+    var cols = row.split(',');
+    if (cols.length < 4) return;
+    var brand = cols[0].trim();
+    var ptt   = parseInt(cols[1]) || 0;
+    var news  = parseInt(cols[2]) || 0;
+    var month = (cols[3] || '').trim();
+    if (month !== buzzMonthKey()) return;
+    if (!autoCache[brand]) autoCache[brand] = {};
+    autoCache[brand].ptt  = { count: ptt,  ok: true };
+    autoCache[brand].news = { count: news, ok: true, topics: [] };
+    autoCache[brand].anyOk = true;
+    loaded++;
+  });
+
+  if (loaded === 0) {
+    if (lbl) lbl.textContent = '⚠️ Sheet 內無本月（' + buzzMonthLabel() + '）資料，請先執行 Apps Script';
+    return;
+  }
+
+  try { localStorage.setItem(cKey, JSON.stringify(autoCache)); } catch(e) {}
+  if (lbl) lbl.textContent = '✅ 已載入 ' + loaded + ' 個品牌（' + buzzMonthLabel() + '）';
+  var st=document.getElementById('buzz-sheet-status'); if(st){ st.textContent='上次更新 '+new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'}); }
+  // 新聞仍用 RSS 補充
+  // 新聞用 RSS 補充
+  var toFetch = BUZZ_BRANDS.filter(function(b){ return !(autoCache[b.key]||{}).news; });
+  if (toFetch.length > 0) {
+    toFetch.forEach(function(b, idx){
+      setTimeout(async function(){
+        var monthStart = new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0')+'-01';
+        var topics = [];
+        var newsR = await rssCount(b.news, topics);
+        var cache = {};
+        try{ cache = JSON.parse(localStorage.getItem(cKey))||{}; }catch(e){}
+        if (!cache[b.key]) cache[b.key] = {};
+        cache[b.key].news = { count: newsR.count, ok: newsR.ok, topics: topics };
+        try{ localStorage.setItem(cKey, JSON.stringify(cache)); }catch(e){}
+        renderBuzzDisplay();
+      }, idx * 600);
+    });
+  }
+  renderBuzzDisplay();
+}
+
+
+var BUZZ_RANGES = [
+  {key:'1m',  label:'本月',   months:1},
+  {key:'3m',  label:'三個月', months:3},
+  {key:'6m',  label:'六個月', months:6},
+  {key:'9m',  label:'九個月', months:9},
+  {key:'12m', label:'整年度', months:12},
+];
+var buzzActiveRange = localStorage.getItem('buzz_range') || '1m';
+
+function buzzCacheKey() {
+  return 'buzz_auto_' + buzzMonthKey() + '_' + buzzActiveRange;
+}
+function buzzRangeMonths() {
+  var r = BUZZ_RANGES.find(function(x){ return x.key===buzzActiveRange; });
+  return r ? r.months : 1;
+}
+function buzzRangeLabel() {
+  var r = BUZZ_RANGES.find(function(x){ return x.key===buzzActiveRange; });
+  return r ? r.label : '本月';
+}
+function buzzRangeStart() {
+  var now = new Date();
+  return new Date(now.getFullYear(), now.getMonth() - (buzzRangeMonths() - 1), 1);
+}
+function setRange(key) {
+  buzzActiveRange = key;
+  localStorage.setItem('buzz_range', key);
+  renderRangeButtons();
+  rebuildBuzzCache();
+  renderBuzzDisplay();
+}
+function renderRangeButtons() {
+  var el = document.getElementById('buzz-range-btns');
+  if (!el) return;
+  el.innerHTML = BUZZ_RANGES.map(function(r){
+    var active = r.key === buzzActiveRange;
+    return '<button onclick="setRange(\'' + r.key + '\')" style="'
+      +'background:'+(active?'#1c69d4':'#1a1a1a')+';'
+      +'color:'+(active?'#fff':'#888')+';'
+      +'border:1px solid '+(active?'#1c69d4':'#333')+';'
+      +'border-radius:6px;padding:4px 12px;font-size:0.78rem;cursor:pointer;'
+      +'font-weight:'+(active?'700':'400')+'">'+r.label+'</button>';
+  }).join('');
+}
+
+var BUZZ_BRANDS = [
+  {key:'bmw',    label:'BMW',    color:'#1c69d4', ptt:'BMW',     news:'BMW 台灣'},
+  {key:'mb',     label:'賓士',   color:'#aaaaaa', ptt:'賓士',    news:'賓士 台灣'},
+  {key:'audi',   label:'Audi',   color:'#bb2222', ptt:'Audi',    news:'Audi 台灣'},
+  {key:'porsche',label:'Porsche',color:'#d4a017', ptt:'Porsche', news:'Porsche 台灣'},
+];
+
+function sleep(ms){ return new Promise(function(r){setTimeout(r,ms);}); }
+
+
+// ── 月份工具 ──────────────────────────────────────────────
+function buzzMonthKey() {
+  var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
+function buzzMonthLabel() {
+  var d=new Date(); return d.getFullYear()+'年'+(d.getMonth()+1)+'月';
+}
+function loadManual() {
+  try{ return JSON.parse(localStorage.getItem('buzz_manual_'+buzzMonthKey()))||{}; }catch(e){ return {}; }
+}
+function saveManual() {
+  var m={};
+  BUZZ_BRANDS.forEach(function(b){
+    ['ptt','news'].forEach(function(src){
+      var el=document.getElementById('m-'+src+'-'+b.key);
+      if(el && el.value!=='') m[b.key+'_'+src]=parseInt(el.value)||0;
+    });
+  });
+  localStorage.setItem('buzz_manual_'+buzzMonthKey(),JSON.stringify(m));
+  renderBuzzDisplay();
+  var st=document.getElementById('buzz-save-status');
+  if(st){ st.textContent='✅ 已儲存（'+buzzMonthLabel()+'）'; setTimeout(function(){st.textContent='';},3000); }
+}
+
+
+
+// 透過 Google News RSS + site: 篩選，統一抓四個來源
+async function proxyFetchRaw(url) {
+  var enc = encodeURIComponent(url);
+  // 1. corsproxy.io（直接回傳原始文字）
+  try {
+    var r = await fetch('https://corsproxy.io/?' + enc, {signal:AbortSignal.timeout(8000)});
+    if (r.ok) { var t = await r.text(); if (t.length > 200) return t; }
+  } catch(e){}
+  // 2. allorigins.win（回傳 JSON {contents}）
+  try {
+    var r2 = await fetch('https://api.allorigins.win/get?url=' + enc, {signal:AbortSignal.timeout(8000)});
+    if (r2.ok) { var j = await r2.json(); var t2 = j.contents||''; if (t2.length > 200) return t2; }
+  } catch(e){}
+  // 3. codetabs proxy
+  try {
+    var r3 = await fetch('https://api.codetabs.com/v1/proxy?quest=' + enc, {signal:AbortSignal.timeout(8000)});
+    if (r3.ok) { var t3 = await r3.text(); if (t3.length > 200) return t3; }
+  } catch(e){}
+  // 4. thingproxy
+  try {
+    var r4 = await fetch('https://thingproxy.freeboard.io/fetch/' + url, {signal:AbortSignal.timeout(8000)});
+    if (r4.ok) { var t4 = await r4.text(); if (t4.length > 200) return t4; }
+  } catch(e){}
+  return '';
+}
+
+async function rssCount(query, topicsArr) {
+  var d = new Date(); var year = d.getFullYear(); var month = d.getMonth();
+  // 先試中文版，失敗再試無地區版
+  var rssUrls = [
+    'https://news.google.com/rss/search?q='+encodeURIComponent(query)+'&hl=zh-TW&gl=TW&ceid=TW:zh-Hant',
+    'https://news.google.com/rss/search?q='+encodeURIComponent(query),
+  ];
+  var nc = '';
+  for (var ri=0; ri<rssUrls.length && nc.length<200; ri++) {
+    nc = await proxyFetchRaw(rssUrls[ri]);
+    if (nc.length > 200) break;
+    await sleep(300);
+  }
+  if (nc.length < 200) return {count:0, ok:false};
+  var items = nc.match(/<item>[\s\S]*?<\/item>/g)||[];
+  var valid = items.filter(function(it){
+    var pd = it.match(/<pubDate>([^<]+)<\/pubDate>/);
+    if (!pd) return true;
+    var dd = new Date(pd[1]);
+    return dd.getFullYear()===year && dd.getMonth()===month;
+  });
+  if (topicsArr) valid.slice(0,3).forEach(function(it){
+    var tM = it.match(/<title><!\[CDATA\[([^\]]+)\]\]><\/title>/);
+    var lM = it.match(/<link>([^<]+)<\/link>/);
+    if(tM&&lM) topicsArr.push({title:tM[1].substring(0,60), url:lM[1]});
+  });
+  return {count:valid.length, ok:true};
+}
+
+// ── PTT 汽車板：Google News RSS + site: 篩選 ──────────
+async function pttCount(keyword) {
+  var d = new Date(); var year = d.getFullYear(); var month = d.getMonth();
+  var nc = await proxyFetchRaw(
+    'https://news.google.com/rss/search?q='+encodeURIComponent('site:ptt.cc/bbs/car '+keyword)+'&hl=zh-TW&gl=TW&ceid=TW:zh-Hant'
+  );
+  if (nc.length < 300) return {count:0, ok:false};
+  var items = nc.match(/<item>[\s\S]*?<\/item>/g)||[];
+  var valid = items.filter(function(it){
+    var pd = it.match(/<pubDate>([^<]+)<\/pubDate>/);
+    if (!pd) return true;
+    var dd = new Date(pd[1]);
+    return dd.getFullYear()===year && dd.getMonth()===month;
+  });
+  return {count: valid.length, ok: true};
+}
+
+async function fetchAllBuzzSources(brand) {
+  // PTT 只從 Google Sheet 載入，不在瀏覽器端自動抓
+  var topics = [];
+  var newsR = await rssCount(brand.news, topics);
+  return {
+    ptt:  null,   // 等待 Sheet 載入
+    news: {count:newsR.count, ok:newsR.ok, topics:topics},
+    anyOk: true   // 新聞不管成不成功都存快取，避免一直重試
+  };
+}
+
+function clearManual(){
+  localStorage.removeItem('buzz_manual_'+buzzMonthKey());
+  renderBuzzDisplay();
+}
+
+function renderBuzzDisplay() {
+  var manual = loadManual();
+  var autoCache = {};
+  try{ autoCache=JSON.parse(localStorage.getItem(buzzCacheKey()))||{}; }catch(e){}
+
+  function val(brandKey, src) {
+    var mk = brandKey+'_'+src;
+    if (manual[mk] !== undefined) return {v:manual[mk], manual:true};
+    var brandCache = autoCache[brandKey] || {};
+    if (src === 'ptt') {
+      var ac = brandCache.ptt;
+      if (ac === null) return {v:'sheet', manual:false, ok:false}; // 等待 Sheet 載入
+      if (ac !== undefined) return {v:ac.count, manual:false, ok:ac.ok};
+      return {v:'sheet', manual:false, ok:false};
+    }
+    var ac = brandCache[src];
+    if (ac !== undefined) return {v:ac.count, manual:false, ok:ac.ok};
+    return {v:null, manual:false, ok:false};
+  }
+
+  var maxTotal = 0;
+  BUZZ_BRANDS.forEach(function(b){
+    var tot = ['ptt','news'].reduce(function(s,src){ var v=val(b.key,src).v; return s+(typeof v==='number'?v:0); }, 0);
+    if(tot>maxTotal) maxTotal=tot;
+  });
+  if(!maxTotal) maxTotal=1;
+
+  // ── Rank cards ───────────────────────────────────────────
+  var rankEl = document.getElementById('buzz-rank-cards');
+  if(rankEl){
+    var ranked = BUZZ_BRANDS.slice().sort(function(a,b2){
+      var ta=['ptt','news'].reduce(function(s,src){var v=val(a.key,src).v;return s+(typeof v==='number'?v:0);},0);
+      var tb=['ptt','news'].reduce(function(s,src){var v=val(b2.key,src).v;return s+(typeof v==='number'?v:0);},0);
+      return tb-ta;
+    });
+    rankEl.innerHTML = ranked.map(function(b,i){
+      var tot=['ptt','news'].reduce(function(s,src){var v=val(b.key,src).v;return s+(typeof v==='number'?v:0);},0);
+      return '<div style="background:#141414;border:1px solid #222;border-top:3px solid '+b.color+';border-radius:10px;padding:16px;text-align:center">'
+        +'<div style="font-size:1.4rem">'+['🥇','🥈','🥉','4️⃣'][i]+'</div>'
+        +'<div style="font-size:0.85rem;font-weight:700;color:'+b.color+';margin:6px 0">'+b.label+'</div>'
+        +'<div style="font-size:1.8rem;font-weight:800;color:#fff">'+tot+'</div>'
+        +'<div style="font-size:0.68rem;color:#555;margin-top:2px">'+buzzRangeLabel()+'索引量</div></div>';
+    }).join('');
+  }
+
+  // ── Bar chart ────────────────────────────────────────────
+  var barsEl = document.getElementById('buzz-bars');
+  if(barsEl){
+    barsEl.innerHTML = BUZZ_BRANDS.map(function(b){
+      var parts = ['ptt','news'].map(function(src){var v=val(b.key,src).v;return typeof v==='number'?v:0;});
+      var tot = parts.reduce(function(a,v){return a+v;},0);
+      var pct = Math.round((tot/maxTotal)*100);
+      return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">'
+        +'<div style="width:70px;text-align:right;font-size:0.82rem;color:'+b.color+';font-weight:600">'+b.label+'</div>'
+        +'<div style="flex:1;background:#222;border-radius:4px;height:24px;overflow:hidden">'
+        +'<div style="width:'+pct+'%;background:'+b.color+';height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:0.78rem;color:#fff;min-width:2px">'+tot+'</div></div>'
+        +'<div style="width:90px;font-size:0.7rem;color:#555">PTT:'+parts[0]+' 新聞:'+parts[1]+'</div></div>';
+    }).join('');
+  }
+
+  // ── Table ────────────────────────────────────────────────
+  var tbody = document.getElementById('buzz-table-body');
+  if(tbody){
+    tbody.innerHTML = BUZZ_BRANDS.map(function(b){
+      var vals = ['ptt','news'].map(function(src){return val(b.key,src);});
+      var tot = vals.reduce(function(s,v){var n=v.v;return s+(typeof n==='number'?n:0);},0);
+      var pct = Math.round((tot/maxTotal)*100);
+      function cell(v){
+        if(v.v===null) return '<span style="color:#444;font-size:0.78rem">⏳</span>';
+        if(v.v==='sheet') return '<span style="color:#555;font-size:0.72rem" title="請點『從 Sheet 載入』">📋</span>';
+        if(!v.ok&&v.v===0&&!v.manual) return '<span style="color:#444" title="Google未索引到">0*</span>';
+        return v.v+(v.manual?'<sup style="color:#f0a;font-size:0.6rem">✎</sup>':'');
+      }
+      return '<tr style="border-bottom:1px solid #1a1a1a">'
+        +'<td style="padding:10px 12px"><span style="color:'+b.color+';font-weight:600">'+b.label+'</span></td>'
+        +vals.map(function(v){return '<td style="text-align:center;padding:8px;color:#ccc">'+cell(v)+'</td>';}).join('')
+        +'<td style="text-align:center;padding:8px">'
+          +'<div style="display:flex;align-items:center;gap:8px;justify-content:center">'
+          +'<div style="width:80px;height:8px;background:#222;border-radius:4px;overflow:hidden">'
+          +'<div style="width:'+pct+'%;height:100%;background:'+b.color+';border-radius:4px"></div></div>'
+          +'<span style="color:'+b.color+';font-weight:700">'+tot+'</span></div></td></tr>';
+    }).join('');
+  }
+
+  // ── Hot topics ───────────────────────────────────────────
+  var topicsEl = document.getElementById('buzz-hot-topics');
+  if(topicsEl){
+    var all=[];
+    BUZZ_BRANDS.forEach(function(b){
+      ((autoCache[b.key]||{}).news||{topics:[]}).topics.forEach(function(t){all.push({brand:b.label,color:b.color,topic:t});});
+    });
+    topicsEl.innerHTML = all.length ? all.map(function(item){
+      return '<a href="'+item.topic.url+'" target="_blank" style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#141414;border-radius:8px;margin-bottom:6px;text-decoration:none;border-left:3px solid '+item.color+'">'
+        +'<span style="font-size:0.72rem;color:'+item.color+';min-width:50px">'+item.brand+'</span>'
+        +'<span style="font-size:0.72rem;background:#222;color:#aaa;padding:2px 6px;border-radius:4px">新聞</span>'
+        +'<span style="font-size:0.82rem;color:#ccc;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+item.topic.title+'</span>'
+        +'<span style="font-size:0.7rem;color:#444">↗</span></a>';
+    }).join('') : '<div style="color:#555;font-size:0.85rem">抓取完成後顯示新聞標題連結</div>';
+  }
+
+  // ── Manual override table ────────────────────────────────
+  var thEl = document.getElementById('buzz-threads-manual');
+  if(thEl){
+    thEl.innerHTML = '<div style="background:#1a1a1a;border-radius:10px;padding:16px;border:1px solid #2a2a2a">'
+      +'<div style="font-size:0.88rem;font-weight:600;color:#ddd;margin-bottom:4px">✏️ 手動覆蓋（選填）</div>'
+      +'<div style="font-size:0.75rem;color:#666;margin-bottom:12px">數字為 Google 索引篇數（<span style="color:#aaa">0*</span>=未索引）。若你知道實際數字可在此覆蓋，<span style="color:#f0a">✎</span> = 手動值。</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">'
+      +BUZZ_BRANDS.map(function(b){
+        return '<div style="min-width:180px">'
+          +'<div style="font-size:0.78rem;color:'+b.color+';font-weight:600;margin-bottom:6px">'+b.label+'</div>'
+          +'<div style="display:grid;grid-template-columns:auto 1fr;gap:4px 8px;align-items:center">'
+          +['ptt','news'].map(function(src){
+            var mv=(loadManual())[b.key+'_'+src];
+            return '<span style="font-size:0.7rem;color:#555">'+src.toUpperCase()+'</span>'
+              +'<input id="m-'+src+'-'+b.key+'" type="number" min="0" placeholder="auto"'
+              +' value="'+(mv!==undefined?mv:'')+'"'
+              +' style="width:70px;background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:3px 6px;color:#fff;font-size:0.8rem;text-align:center">';
+          }).join('')
+          +'</div></div>';
+      }).join('')
+      +'</div>'
+      +'<div style="display:flex;align-items:center;gap:12px;margin-top:12px">'
+      +'<button onclick="saveManual()" style="background:#1c69d4;color:#fff;border:none;border-radius:7px;padding:6px 20px;cursor:pointer;font-size:0.82rem;font-weight:600">💾 儲存覆蓋值</button>'
+      +'<button onclick="clearManual()" style="background:#333;color:#aaa;border:none;border-radius:7px;padding:6px 14px;cursor:pointer;font-size:0.78rem">清除手動值</button>'
+      +'<span id="buzz-save-status" style="font-size:0.8rem;color:#4caf50"></span></div></div>';
+  }
+}
+
+
+async function renderBuzz() {
+  var lbl = document.getElementById('buzz-scan-label');
+  var cKey = buzzCacheKey();
+  var autoCache = {};
+  try{ autoCache=JSON.parse(localStorage.getItem(cKey))||{}; }catch(e){}
+
+  // 清除之前全部失敗的快取，讓它重試
+  // PTT 來自 Sheet，不強制刪除 anyOk=false 的快取
+
+  renderBuzzDisplay();
+
+  var toFetch = BUZZ_BRANDS.filter(function(b){ return !(autoCache[b.key]||{}).news; });
+  if (toFetch.length === 0) {
+    if(lbl) lbl.textContent = '✅ '+buzzRangeLabel()+'（快取中）';
+    renderBuzzDisplay(); return;
+  }
+
+  if(lbl) lbl.textContent = '⏳ 抓取中（'+buzzRangeLabel()+'）...';
+
+  // ── 四個品牌同時平行抓取 ────────────────────────────────
+  var promises = toFetch.map(function(b, idx){
+    // 各品牌錯開 200ms 啟動，避免同時打 proxy
+    return new Promise(function(resolve){
+      setTimeout(async function(){
+        try {
+          var res = await fetchAllBuzzSources(b);
+          // 合併而非覆蓋，保留 Sheet 載入的 PTT 資料
+          if (!autoCache[b.key]) autoCache[b.key] = {};
+          if (res.news) autoCache[b.key].news = res.news;
+          autoCache[b.key].anyOk = true;
+          try{ localStorage.setItem(cKey, JSON.stringify(autoCache)); }catch(e){}
+        } catch(e){}
+        renderBuzzDisplay();
+        resolve();
+      }, idx * 200);
+    });
+  });
+
+  await Promise.all(promises);
+  if(lbl) lbl.textContent = '✅ '+buzzRangeLabel()+'資料抓取完成';
+  renderBuzzDisplay();
+}
+
+// ── Init ───────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function(){
+  var firstBtn = document.querySelector('.tab-btn');
+  if (firstBtn) switchTab('bmw', firstBtn);
+  loadBuzzSheetUrlInput();
+  renderRangeButtons();
+  // 初始化 Sheet status
+  var initUrl = localStorage.getItem('buzz_sheet_url') || '';
+  if (initUrl) { var st=document.getElementById('buzz-sheet-status'); if(st) st.textContent='已設定 Sheet'; }
+});
+</script>
+</body>
+</html>
