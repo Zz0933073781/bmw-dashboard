@@ -790,6 +790,12 @@
 </head>
 <body>
 
+<!-- Facebook SDK -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v19.0"
+  nonce="bmwdash"></script>
+
 <header>
   <div class="header-left">
     <svg class="bmw-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -1203,19 +1209,7 @@ function switchTab(name, btn) {
   if (name === 'overview') { loadBMWDealerYT(); renderOverview(); }
 }
 
-// ── Iframe helper ───────────────────────────────────────────
-function buildSrc(pageId) {
-  const enc = encodeURIComponent('https://www.facebook.com/' + pageId + '/');
-  return `https://www.facebook.com/plugins/page.php?href=${enc}&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false`;
-}
-
-function showIframe(uid) {
-  const l = document.getElementById('lp-' + uid);
-  const f = document.getElementById('if-' + uid);
-  if (l) l.style.display = 'none';
-  if (f) { f.style.display = 'block'; f.style.height = '500px'; }
-}
-
+// ── Facebook SDK Card ────────────────────────────────────────
 function buildCard(p, accentColor) {
   const card = document.createElement('div');
   card.className = 'page-card';
@@ -1232,23 +1226,29 @@ function buildCard(p, accentColor) {
       </div>
       <a class="card-link" href="${p.url}" target="_blank">前往專頁 ↗</a>
     </div>
-    <div class="fb-embed-wrap">
-      <div class="loading-ph" id="lp-${uid}">
-        <div class="spinner" style="border-top-color:${accentColor}"></div>
-        <p>載入 Facebook 動態中…</p>
+    <div class="fb-embed-wrap" style="min-height:500px;background:#fff;display:flex;align-items:center;justify-content:center">
+      <div class="fb-page"
+        data-href="${p.url}"
+        data-tabs="timeline"
+        data-width="350"
+        data-height="500"
+        data-small-header="true"
+        data-adapt-container-width="true"
+        data-hide-cover="false"
+        data-show-facepile="false">
+        <blockquote cite="${p.url}" class="fb-xfbml-parse-ignore">
+          <a href="${p.url}">${p.name}</a>
+        </blockquote>
       </div>
-      <iframe
-        id="if-${uid}"
-        src="${buildSrc(uid)}"
-        height="500"
-        scrolling="yes" frameborder="0"
-        allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        onload="showIframe('${uid}')">
-      </iframe>
     </div>`;
 
   return card;
 }
+
+// 當 SDK 載入後重新解析所有 fb-page 元素
+window.fbAsyncInit = function() {
+  FB.init({ xfbml: true, version: 'v19.0' });
+};
 
 function buildSection(container, sectionDef) {
   const sec = document.createElement('div');
