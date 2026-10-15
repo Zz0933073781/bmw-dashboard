@@ -6,11 +6,11 @@
   <title>BMW 台灣經銷商 & 競品 Facebook 監控儀表板</title>
   <!-- ========== BMW_LIVE_DATA_START ========== -->
 <script>
-    /* Auto-generated: 2026-10-01 12:10 */
+    /* Auto-generated: 2026-10-15 07:44 */
     window.DEMO_MODE       = false;
     window.LIVE_ALERTS     = [];
     window.LIVE_POST_COUNTS= {"台北氾德": {"group": "bmw", "posts": 0, "ok": false}, "台北鎔德": {"group": "bmw", "posts": 0, "ok": false}, "台北依德": {"group": "bmw", "posts": 0, "ok": false}, "台北尚德": {"group": "bmw", "posts": 0, "ok": false}, "桃園大桐": {"group": "bmw", "posts": 0, "ok": false}, "新竹中鏎": {"group": "bmw", "posts": 0, "ok": false}, "蘭陽鎔德": {"group": "bmw", "posts": 0, "ok": false}, "南投長慶": {"group": "bmw", "posts": 0, "ok": false}, "彰化昌一": {"group": "bmw", "posts": 0, "ok": false}, "嘉義賓歐": {"group": "bmw", "posts": 0, "ok": false}, "台灣賓士官方": {"group": "mb", "posts": 0, "ok": false}, "中華賓士": {"group": "mb", "posts": 0, "ok": false}, "台隆賓士": {"group": "mb", "posts": 0, "ok": false}, "台明賓士": {"group": "mb", "posts": 0, "ok": false}, "德冠賓士": {"group": "mb", "posts": 0, "ok": false}, "Audi Taiwan 官方": {"group": "audi", "posts": 0, "ok": false}, "奧迭北區": {"group": "audi", "posts": 0, "ok": false}, "台奧北區": {"group": "audi", "posts": 0, "ok": false}, "台灣保時捷官方": {"group": "porsche", "posts": 0, "ok": false}, "氾德永業保時捷": {"group": "porsche", "posts": 0, "ok": false}, "台北保時捷中心": {"group": "porsche", "posts": 0, "ok": false}, "新北保時捷中心": {"group": "porsche", "posts": 0, "ok": false}, "桃園保時捷中心": {"group": "porsche", "posts": 0, "ok": false}, "台南保時捷中心": {"group": "porsche", "posts": 0, "ok": false}};
-    window.LAST_SCAN_TIME  = "2026-10-01 12:10";
+    window.LAST_SCAN_TIME  = "2026-10-15 07:44";
     window.LIVE_OK_COUNT   = 0;
     window.LIVE_FAIL_COUNT = 24;
 </script>
@@ -191,12 +191,13 @@
 
     .fb-embed-wrap {
       background: #fff;
-      min-height: 480px;
+      min-height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
-    .fb-embed-wrap iframe { display: none; border: none; width: 100%; }
+    .fb-embed-wrap iframe { display: none; border: none; width: 100%; height: 500px; overflow-y: auto; }
 
     .loading-ph {
       display: flex;
@@ -851,6 +852,21 @@
 <div class="tab-panel" id="panel-overview">
   <div style="padding:20px 24px">
 
+    <!-- ══ BMW 汎德系列 YouTube 最新影片（RSS，免 API Key）══ -->
+    <div style="margin-bottom:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="font-size:1rem;font-weight:700;color:#ddd">🎬 BMW 汎德頻道最新影片</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span id="bmw-yt-label" style="font-size:0.78rem;color:#888"></span>
+          <button onclick="loadBMWDealerYT(true)" style="background:#222;color:#aaa;border:1px solid #333;border-radius:6px;padding:4px 12px;font-size:0.78rem;cursor:pointer">🔄 重新抓取</button>
+        </div>
+      </div>
+      <div id="bmw-dealer-yt-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="color:#555;font-size:0.8rem;padding:20px 0;grid-column:1/-1">⏳ 載入中...</div>
+      </div>
+    </div>
+    <hr style="border:none;border-top:1px solid #222;margin-bottom:24px">
+
     <!-- API Key Setup -->
     <div id="yt-key-banner" style="display:none;background:#1a2a1a;border:1px solid #2d5a2d;border-radius:10px;padding:16px 20px;margin-bottom:20px">
       <div style="font-size:0.9rem;color:#7ecf7e;font-weight:600;margin-bottom:8px">🔑 需要 YouTube Data API Key</div>
@@ -1184,20 +1200,20 @@ function switchTab(name, btn) {
   };
   document.getElementById('status-text').textContent = labels[name] || '';
   if (name === 'buzz') { renderRangeButtons(); autoLoadBuzz(); }
-  if (name === 'overview') renderOverview();
+  if (name === 'overview') { loadBMWDealerYT(); renderOverview(); }
 }
 
 // ── Iframe helper ───────────────────────────────────────────
 function buildSrc(pageId) {
   const enc = encodeURIComponent('https://www.facebook.com/' + pageId + '/');
-  return `https://www.facebook.com/plugins/page.php?href=${enc}&tabs=timeline&width=340&height=480&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false`;
+  return `https://www.facebook.com/plugins/page.php?href=${enc}&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false`;
 }
 
 function showIframe(uid) {
   const l = document.getElementById('lp-' + uid);
   const f = document.getElementById('if-' + uid);
   if (l) l.style.display = 'none';
-  if (f) f.style.display = 'block';
+  if (f) { f.style.display = 'block'; f.style.height = '500px'; }
 }
 
 function buildCard(p, accentColor) {
@@ -1224,8 +1240,8 @@ function buildCard(p, accentColor) {
       <iframe
         id="if-${uid}"
         src="${buildSrc(uid)}"
-        height="480"
-        scrolling="no" frameborder="0"
+        height="500"
+        scrolling="yes" frameborder="0"
         allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
         onload="showIframe('${uid}')">
       </iframe>
@@ -1799,6 +1815,80 @@ async function enrichWithStats(items, apiKey) {
 }
 
 // ── YouTube Overview ──────────────────────────────────────
+// ── BMW 汎德系列頻道（RSS，免 API Key）──────────────────────
+var BMW_DEALER_YT = [
+  { label:'BMW Taiwan 總代理汎德', color:'#1c69d4', channelId:'UChJjCHL2LZVrzWCzBXCmzQw' },
+  { label:'BMW 台北依德',          color:'#3b82f6', channelId:'UC9PEg3jYHQHnQzCEiJjETgg' },
+  { label:'BMW 台北鎔德',          color:'#60a5fa', channelId:'UCXXnMMiKIlTKq3t9agN3BqQ' },
+];
+
+async function fetchYTRSS(channelId) {
+  var rssUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + channelId;
+  // 使用 allorigins 繞過 CORS
+  var proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
+  try {
+    var resp = await fetch(proxy);
+    var json = await resp.json();
+    var xml = json.contents;
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(xml, 'text/xml');
+    var entries = Array.from(doc.querySelectorAll('entry')).slice(0, 3);
+    return entries.map(function(e) {
+      var videoId = (e.querySelector('videoId') || e.querySelector('id')).textContent.replace('yt:video:','');
+      var title = e.querySelector('title').textContent;
+      var published = e.querySelector('published').textContent;
+      var thumb = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg';
+      var url = 'https://www.youtube.com/watch?v=' + videoId;
+      return { title: title, published: published, thumb: thumb, url: url };
+    });
+  } catch(e) { return []; }
+}
+
+async function loadBMWDealerYT(forceRefresh) {
+  var lbl = document.getElementById('bmw-yt-label');
+  var grid = document.getElementById('bmw-dealer-yt-grid');
+  if (!grid) return;
+  var cKey = 'bmw_dealer_yt_' + new Date().toISOString().split('T')[0];
+  var cached = null;
+  if (!forceRefresh) { try { cached = JSON.parse(localStorage.getItem(cKey)); } catch(e){} }
+  var allData;
+  if (cached) {
+    allData = cached;
+    if (lbl) lbl.textContent = '✅ 今日已更新';
+  } else {
+    if (lbl) lbl.textContent = '⏳ 抓取中...';
+    allData = {};
+    for (var i = 0; i < BMW_DEALER_YT.length; i++) {
+      var ch = BMW_DEALER_YT[i];
+      allData[ch.channelId] = await fetchYTRSS(ch.channelId);
+    }
+    try { localStorage.setItem(cKey, JSON.stringify(allData)); } catch(e){}
+    if (lbl) lbl.textContent = '✅ 更新於 ' + new Date().toLocaleTimeString('zh-TW', {hour:'2-digit',minute:'2-digit'});
+  }
+  var html = '';
+  BMW_DEALER_YT.forEach(function(ch) {
+    var videos = allData[ch.channelId] || [];
+    html += '<div style="background:#141414;border:1px solid #222;border-top:3px solid '+ch.color+';border-radius:10px;padding:16px">'
+      + '<div style="font-size:0.85rem;font-weight:700;color:'+ch.color+';margin-bottom:12px">▶ '+ch.label+'</div>';
+    if (!videos.length) {
+      html += '<div style="font-size:0.78rem;color:#555">無法載入影片</div>';
+    } else {
+      videos.forEach(function(v) {
+        var d = new Date(v.published);
+        var dateStr = (d.getMonth()+1)+'/'+(d.getDate());
+        html += '<a href="'+v.url+'" target="_blank" style="display:flex;gap:10px;margin-bottom:12px;text-decoration:none;align-items:flex-start">'
+          + '<img src="'+v.thumb+'" style="width:96px;height:54px;object-fit:cover;border-radius:4px;flex-shrink:0">'
+          + '<div style="flex:1;min-width:0">'
+          + '<div style="font-size:0.78rem;color:#ccc;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">'+v.title+'</div>'
+          + '<div style="margin-top:4px;font-size:0.7rem;color:#666">📅 '+dateStr+'</div>'
+          + '</div></a>';
+      });
+    }
+    html += '</div>';
+  });
+  grid.innerHTML = html;
+}
+
 var YT_CHANNELS = [
   {key:'bmw',    label:'BMW Taiwan 汎德',  color:'#1c69d4', handle:'BMWTWOFFCIAL'},
   {key:'mb',     label:'Mercedes-Benz TW', color:'#aaaaaa', handle:'MercedesBenzTW'},
