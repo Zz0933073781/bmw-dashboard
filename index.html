@@ -1209,14 +1209,24 @@ function switchTab(name, btn) {
   if (name === 'overview') { loadBMWDealerYT(); renderOverview(); }
 }
 
-// ── Facebook SDK Card ────────────────────────────────────────
+// ── Iframe helper ───────────────────────────────────────────
+function buildSrc(pageId) {
+  const enc = encodeURIComponent('https://www.facebook.com/' + pageId + '/');
+  return `https://www.facebook.com/plugins/page.php?href=${enc}&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&lazy=true`;
+}
+
+function showIframe(uid) {
+  const l = document.getElementById('lp-' + uid);
+  const f = document.getElementById('if-' + uid);
+  if (l) l.style.display = 'none';
+  if (f) { f.style.display = 'block'; }
+}
+
 function buildCard(p, accentColor) {
   const card = document.createElement('div');
   card.className = 'page-card';
   card.style.borderColor = accentColor + '44';
-
   const uid = p.pageId;
-
   card.innerHTML = `
     <div class="card-header" style="background: linear-gradient(135deg, ${accentColor}dd, ${accentColor}88)">
       <div class="card-icon">🏢</div>
@@ -1226,29 +1236,25 @@ function buildCard(p, accentColor) {
       </div>
       <a class="card-link" href="${p.url}" target="_blank">前往專頁 ↗</a>
     </div>
-    <div class="fb-embed-wrap" style="min-height:500px;background:#fff;display:flex;align-items:center;justify-content:center">
-      <div class="fb-page"
-        data-href="${p.url}"
-        data-tabs="timeline"
-        data-width="350"
-        data-height="500"
-        data-small-header="true"
-        data-adapt-container-width="true"
-        data-hide-cover="false"
-        data-show-facepile="false">
-        <blockquote cite="${p.url}" class="fb-xfbml-parse-ignore">
-          <a href="${p.url}">${p.name}</a>
-        </blockquote>
+    <div class="fb-embed-wrap">
+      <div class="loading-ph" id="lp-${uid}">
+        <div class="spinner" style="border-top-color:${accentColor}"></div>
+        <p>載入 Facebook 動態中…</p>
       </div>
+      <iframe
+        id="if-${uid}"
+        src="${buildSrc(uid)}"
+        height="500"
+        scrolling="yes" frameborder="0"
+        allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        onload="showIframe('${uid}')">
+      </iframe>
     </div>`;
-
   return card;
 }
 
-// 當 SDK 載入後重新解析所有 fb-page 元素
-window.fbAsyncInit = function() {
-  FB.init({ xfbml: true, version: 'v19.0' });
-};
+// fbAsyncInit 保留為空，不使用 SDK 渲染
+window.fbAsyncInit = function() {};
 
 function buildSection(container, sectionDef) {
   const sec = document.createElement('div');
@@ -2876,15 +2882,4 @@ async function renderBuzz() {
 }
 
 // ── Init ───────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function(){
-  var firstBtn = document.querySelector('.tab-btn');
-  if (firstBtn) switchTab('bmw', firstBtn);
-  loadBuzzSheetUrlInput();
-  renderRangeButtons();
-  // 初始化 Sheet status
-  var initUrl = localStorage.getItem('buzz_sheet_url') || '';
-  if (initUrl) { var st=document.getElementById('buzz-sheet-status'); if(st) st.textContent='已設定 Sheet'; }
-});
-</script>
-</body>
-</html>
+document.addEventListener('DOMCon
